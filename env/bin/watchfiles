@@ -1,5 +1,5 @@
 #!/bin/sh
-'''exec' "/Users/aidachavero/Documents/Tecnocampus/TFG Videojocs/CardCreator/env/bin/python3.12" "$0" "$@"
+'''exec' "/Users/aidachavero/Documents/Tecnocampus/TFG Videojocs/TFG_CardCreator/env/bin/python3.12" "$0" "$@"
 ' '''
 # -*- coding: utf-8 -*-
 import re

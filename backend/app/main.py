@@ -1,14 +1,25 @@
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from fastapi import FastAPI
+from app.api.v1.api_v1 import api_router
+from app.core.config import settings
 
-# Crear una instancia de la aplicación FastAPI
-app = FastAPI()
+app = FastAPI(title=settings.PROJECT_NAME, version=settings.PROJECT_VERSION)
 
-# Definir una ruta de ejemplo
+# Include the API routes
+app.include_router(api_router, prefix="/api/v1")
+
+# Define the root route as an example
 @app.get("/")
 async def root():
     return {"message": "Hello, World!"}
 
-# Definir otra ruta de ejemplo con parámetros
-@app.post("/cards/")
-async def create_cards(item_id: int, q: str = None):
-    return {"item_id": item_id, "q": q}
+from app.core.config import settings
+print(settings.DATABASE_URL)
+print(settings.GOOGLE_CLIENT_ID)
+print(settings.GOOGLE_CLIENT_SECRET)
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
