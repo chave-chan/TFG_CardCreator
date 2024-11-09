@@ -1,0 +1,18 @@
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"  # Maps port 80 of the container to port 3000 of the machine
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"  # Maps port 8000 of the container to port 8000 of the machine
+    volumes:
+      - ./backend:/app  # Enables backend hot-reloading
+    depends_on:
+      - frontend

@@ -1,0 +1,345 @@
+type,title,text,quantity,custom
+instructions,,,3,no
+board,,,15,no
+individual,,Beu la Lore,1,yes
+individual,,Beu la Laura P,1,yes
+individual,,Beu l'Aida,1,yes
+individual,,Beu la Chave,1,yes
+individual,,Beu l'Abril,1,yes
+individual,,Beu l'Anna,1,yes
+individual,,Beu la Sònia,1,yes
+individual,,Beu la Marta,1,yes
+individual,,Beu la Rosa,1,yes
+individual,,Beu l'Estel,1,yes
+individual,,Beu la Laia,1,yes
+individual,,Beu el jugador que estigui davant teu,1,no
+individual,,Beu el jugador de la teva esquerra,1,no
+individual,,Beu el jugador de la teva dreta,1,no
+individual,,Beu d'un got que no sigui teu,1,no
+individual,,Beu per cada any que portis solter,1,no
+individual,,Beu un chupito qui hagi begut menys,1,no
+individual,,Quants pacients se li han mort a la Laura? Si ho endevines reparteix 1 per cada,1,yes
+individual,,Quanta gent hi ha a la llista de la Chave? Si ho endevines reparteix 5,1,yes
+individual,,"Si tens el mòbil sobre la taula, fes un selfie i beu 1",1,no
+individual,,"Si t'agrada algú present, fes-li un petó i bebeu els dos",1,no
+individual,,Si has ficat les banyes beu 3. Si te les han ficat reparteix 1,1,no
+individual,,"Si tens tatuatges, beu 1 per cada. Si no en tens reparteix 3",1,no
+individual,,"Si tens piercings, beu 1 per cada. Si no en tens reparteix 3",1,no
+individual,,"Si vas per la primera copa, beu 1 i agafa una altra carta",1,no
+individual,,"Si tens missatges sense llegir, llegeix l'últim i beu 1",1,no
+individual,,"Si et queda menys de la meitat de la copa, Sant Hilari",1,no
+individual,,"Si treballes del que has estudiat, reparteix 3",1,no
+individual,,"Si portes joies, beu 1 per cada",1,no
+individual,,"Si fumes, beu 1 per cada cop que ho has fet avui",1,no
+individual,,"Si vas al gimnàs, reparteix 1. Si no hi vas, beu 1",1,no
+individual,,"Si avui has jugat a videojocs, beu 1 per cada hora jugada",1,no
+individual,,"Si avui has mirat una serie, beu 1 per cada capitol vist",1,no
+individual,,"Si saps tocar algun instrument, reparteix 1 per cada",1,no
+individual,,Reparteix 1,3,no
+individual,,Reparteix 3,2,no
+individual,,Reparteix 5,1,no
+individual,,Beu 1 i agafa una altra carta,3,no
+individual,,Beu 1,3,no
+individual,,Beu 3,2,no
+individual,,Beu 5,1,no
+individual,,Beu tothom,3,no
+individual,,Beu tothom menys tu,1,no
+individual,,Chupito,5,no
+individual,,Sant Hilari,1,no
+global,,Chupito per tothom,3,no
+global,,Beu qui sigui Àries,1,no
+global,,Beu qui sigui Taure,1,no
+global,,Beu qui sigui Gèmini,1,no
+global,,Beu qui sigui Càncer,1,no
+global,,Beu qui sigui Lleó,1,no
+global,,Beu qui sigui Verge,1,no
+global,,Beu qui sigui Balança,1,no
+global,,Beu qui sigui Escorpió,1,no
+global,,Beu qui sigui Sagitari,1,no
+global,,Beu qui sigui Capricorn,1,no
+global,,Beu qui sigui Aquari,1,no
+global,,Beu qui sigui Peixos,1,no
+global,,Beuen els nois,1,no
+global,,Beuen les noies,1,no
+global,,Beuen les persones no binaries,1,no
+global,,Beuen els frikis,1,no
+global,,Beuen les pijes,1,no
+global,,Beu qui sigui de Rosselló,1,yes
+global,,Beu qui sigui de Torrefarrera,1,yes
+global,,Beu qui sigui d'Alguaire,1,yes
+global,,Beu la Laura i tots els presents a qui els hi hagi fet un massatge,1,yes
+global,,Beu la Sònia i tots els presents a qui els hi hagi fet un massatge,1,yes
+global,,Beu la Rosa i tots els presents a qui els hi hagi fet les ungles,1,yes
+global,,"Si l’Aida ha portat els gossos, tothom beu 1 per cada gos",1,yes
+global,,Beu qui hagi anat a veure una obra de teatre d’una spicy,1,yes
+global,,Beu qui faci o hagi fet teatre,1,no
+global,,Beu qui tingui piercings,1,no
+global,,Beu qui tingui tatuatges,1,no
+global,,Beu qui hagi mantingut relacions sexuals l'última setmana,1,no
+global,,Beu qui hagi treballat avui,1,no
+global,,Beu qui no hagi treballat avui,1,no
+global,,Beu qui treballi o estudiï,1,no
+global,,Beu qui no treballi o estudiï,1,no
+global,,Beu qui sigui autònom,1,no
+global,,Beu qui tingui una carrera,1,no
+global,,Beu qui tingui un máster,1,no
+global,,Beu qui treballi per a l'administració pública,1,no
+global,,Beu qui treballi o hagi treballat de cara al públic,1,no
+global,,Beu qui treballi o hagi treballat en hosteleria,1,no
+global,,Beu qui treballi o hagi treballat amb un altre jugador,1,no
+global,,Beu qui treballi o hagi treballat a l'empresa familiar,1,no
+global,,Beu qui treballi o hagi treballat al camp,1,no
+global,,Beu qui treballi o hagi treballat en educació,1,no
+global,,Beu qui treballi en negre,1,no
+global,,Beu qui hagi estudiat a una escola privada,1,no
+global,,Beu qui hagi estudiat a una escola religiosa,1,no
+global,,Beu qui hagi vist porno durant l'última setmana,1,no
+global,,Beu qui s'hagi masturbat durant l'última setmana,1,no
+global,,Beu qui fumi,1,no
+global,,Beu qui hagi vingut amb parella,1,no
+global,,Beu qui hagi anat al bingo,1,no
+global,,Beu qui hagi hagut d'estar a una taula electoral,1,no
+global,,Beu qui porti les ungles fetes,1,no
+global,,Beu qui vagi maquillat,1,no
+global,,Beu qui hagi anat d'erasmus,1,no
+global,,Beu qui hagi actuat en un musical,1,no
+global,,Beu el més jove del grup,1,no
+global,,Beu el més vell del grup,1,no
+global,,Beu l'últim que hagi estat en un hospital,1,no
+global,,Beu l'últim que hagi estat en un aeroport,1,no
+global,,Beu qui tingui els ulls blaus,1,no
+global,,Beu qui tingui els ulls verds,1,no
+global,,Beu qui tingui els ulls marrons,1,no
+global,,Beu qui tingui miopía o astigmatisme,1,no
+global,,Beu qui estigui solter,1,no
+global,,Beu qui tingui un lio,1,no
+global,,Beu qui tingui parella,1,no
+global,,Beu qui tingui mascota,1,no
+global,,Beu qui visqui més lluny,1,no
+global,,Beu qui no superi al seu ex,1,no
+global,,Beu a qui li agradin les red flags,1,no
+global,,Beu qui estigui bebent vodka,1,no
+global,,Beu qui estigui bebent ron,1,no
+global,,Beu qui estigui bebent jägger,1,no
+global,,Beu qui estigui bebent ginebra,1,no
+global,,Beu qui estigui bebent cervesa,1,no
+global,,Beu qui estigui bebent mojito,1,no
+global,,Beu qui tingui germans,1,no
+global,,Beu l'últim que hagi fet l'aniversari,1,no
+global,,Beu qui porti bambes,1,no
+global,,Beu qui porti plataforma/taló,1,no
+global,,Beu 3 qui vagi amb xandall,1,no
+global,,Beuen les parelles o els convidats,1,no
+global,,Beu qui no recordi el nom de totes les persones amb qui ha estat,1,no
+global,,Beu qui tingui nudes seus a la galeria,1,no
+global,,Beu qui tingui nudes d'una altra persona a la galeria,1,no
+global,,Beu qui sigui celiac,1,no
+global,,Beu qui sigui intolerant a la lactosa,1,no
+global,,Beu qui tingui malalties mentals,1,no
+global,,Beu qui sigui verge,1,no
+global,,Beu qui ho hagi fet amb algú del mateix gènere,1,no
+global,,Beu qui s'hagi enamorat d'un professor,1,no
+global,,Beu qui hagu sigut pillat mentres ho feia,1,no
+global,,Beu qui hagi tingut sexe amb algú que acabava de conèixer,1,no
+global,,Beu qui hagi deixat a algú per missatge,1,no
+global,,Beu qui hagi fet ghosting,1,no
+global,,Beu qui hagi utilitzat una app de cites,1,no
+global,,Beu qui hagi fet o li hagin fet un chupetón,1,no
+global,,Beu qui s'hagi liat amb dues o més persones en una nit,1,no
+global,,Beu qui s'hagi liat amb algú que hagi conegut per internet,1,no
+global,,Beu qui hagi lligat amb algú altre tenint parella,1,no
+global,,Beu qui hagi dit T'estimo sense sentir-ho,1,no
+global,,"Beu qui hagi sigut ""l'altra""",1,no
+global,,Beu qui hagi fumat maria,1,no
+global,,Beu qui hagi provat drogues dures,1,no
+global,,Beu qui hagi fet sexting,1,no
+global,,Beu qui hagi fet un massatge amb segones intencions,1,no
+global,,Beu qui hagi utilitzat lubricant,1,no
+global,,Beu qui tingui una playlist spicy,1,no
+global,,Beu qui tingui o hagi tingut una relació oberta,1,no
+global,,Beu qui hagi pillat als seus pares tenint sexe,1,no
+global,,Beu qui hagi escoltat a algú altre tenint sexe,1,no
+global,,Beu qui hagi repetit alguna assinatura,1,no
+global,,"Qui tingui la copa més plena, beu fins al nivell de la resta",1,no
+global,,"Qui hagi viatjat o viatjarà aquest any, beu 1 per cada viatge",1,no
+global,,Qui hagi portat el joc reparteix 5,1,no
+global,,"Qui tingui menys d'un 50% de batería, beu 3",1,no
+global,,"Qui tingui més d'un 50% de batería, reparteix 1",1,no
+global,,"Qui hagi fet pràctiques sense cobrar, beu 3",1,no
+global,,"Qui hagi fet pràctiques cobrant, reparteix 1",1,no
+global,,"Qui visqui amb els seus pares, beu 3",1,no
+global,,"Qui visqui sol, reparteix 1",1,no
+global,,"Qui tingui un mòbil Android, beu 3",1,no
+global,,"Qui tingui un mòbil Apple, reparteix 1",1,no
+global,,"Si la teva parella és d'una altre país, beu 2",1,no
+global,,"Si el teu nom conté vocals, beu 1 per cada vocal",1,no
+global,,"Si t'han multat, beu 1 per cada multa",1,no
+global,,Si mai t'han multat reparteix 1,1,no
+global,,"Si t'han tret punts del carnet de conduir, beu 1 per cada punt",1,no
+global,,"Si mai t'han tret punts del carnet de conduir, reparteix 1",1,no
+global,,"Si avui has fet migdiada, beu 1 per cada hora dormida",1,no
+global,,"Si has conduit fins aquí, reparteix 3",1,no
+global,,"Si t'han portat fins aquí, beu 1",1,no
+global,,"Si un ligue t'ha regalat fruita, beu 1",1,no
+global,,"Si sou a casa d'algú, beu el propietari. Sinó beu tothom",1,no
+global,,"Si hi ha la Chave, beu tothom menys tu i ella. Sinó beu tothom",1,yes
+global,,"Si algú està mirant el mòbil, llegeix l'últim missatge i beu 1",1,no
+neverhaveiever,JO MAI MAI...,he pensat que algú present serà MILF/DILF,1,no
+neverhaveiever,JO MAI MAI...,ho he fet en un lloc públic,1,no
+neverhaveiever,JO MAI MAI...,ho he fet a la dutxa,1,no
+neverhaveiever,JO MAI MAI...,ho he fet a un jacuzzi,1,no
+neverhaveiever,JO MAI MAI...,ho he fet a una sauna,1,no
+neverhaveiever,JO MAI MAI...,ho he fet a una piscina,1,no
+neverhaveiever,JO MAI MAI...,ho he fet al cotxe,1,no
+neverhaveiever,JO MAI MAI...,ho he fet al terra,1,no
+neverhaveiever,JO MAI MAI...,ho he fet en una tenda de campanya,1,no
+neverhaveiever,JO MAI MAI...,ho he fet a la platja,1,no
+neverhaveiever,JO MAI MAI...,he anat a un hotel només per a fer-ho,1,no
+neverhaveiever,JO MAI MAI...,ho he fet al llit d'una altra persona,1,no
+neverhaveiever,JO MAI MAI...,ho he fet a casa d'un dels presents,1,no
+neverhaveiever,JO MAI MAI...,ho he fet amb algú més a l'habitació,1,no
+neverhaveiever,JO MAI MAI...,ho he fet amb algú mirant,1,no
+neverhaveiever,JO MAI MAI...,ho he fet 3 o més vegades en una nit,1,no
+neverhaveiever,JO MAI MAI...,he sigut infidel,1,no
+neverhaveiever,JO MAI MAI...,he criticat a algú present,1,no
+neverhaveiever,JO MAI MAI...,he tingut un compte secret per a stalkejar,1,no
+neverhaveiever,JO MAI MAI...,he stalkejat al meu ex,1,no
+neverhaveiever,JO MAI MAI...,he stalkejat a qui m'agradava,1,no
+neverhaveiever,JO MAI MAI...,he donat Like sense voler mentres stalkejava,1,no
+neverhaveiever,JO MAI MAI...,he fet un trio,1,no
+neverhaveiever,JO MAI MAI...,he participat en una orgia,1,no
+neverhaveiever,JO MAI MAI...,ho he fet amb algú casat,1,no
+neverhaveiever,JO MAI MAI...,li he dit a algú Papi/Daddy,1,no
+neverhaveiever,JO MAI MAI...,li he dit a algú Mami/Mommy,1,no
+neverhaveiever,JO MAI MAI...,li he pres la parella a algú,1,no
+neverhaveiever,JO MAI MAI...,m'he liat amb algú amb parella,1,no
+neverhaveiever,JO MAI MAI...,m'he liat amb el ex d'una amiga,1,no
+neverhaveiever,JO MAI MAI...,m'he liat amb algú per molestar al meu ex,1,no
+neverhaveiever,JO MAI MAI...,he lligat amb algú per ficar gelosa a una altra persona,1,no
+neverhaveiever,JO MAI MAI...,he estat amb dues o més persones alhora,1,no
+neverhaveiever,JO MAI MAI...,he utilitzat joguines sexuals en parella,1,no
+neverhaveiever,JO MAI MAI...,he utilitzar menjar durant el sexe,1,no
+neverhaveiever,JO MAI MAI...,he fet una sextape,1,no
+neverhaveiever,JO MAI MAI...,he fet sexe oral,1,no
+neverhaveiever,JO MAI MAI...,he rebut sexe oral,1,no
+neverhaveiever,JO MAI MAI...,he fet o rebut sexe oral mentres conduia,1,no
+neverhaveiever,JO MAI MAI...,he tingut sexe disfressat,1,no
+neverhaveiever,JO MAI MAI...,he fet roleplay mentres tenia sexe,1,no
+neverhaveiever,JO MAI MAI...,he cancel•lat plans per a tenir sexe,1,no
+neverhaveiever,JO MAI MAI...,m'he equivocat de nom mentres tenia sexe,1,no
+neverhaveiever,JO MAI MAI...,he pensat en una altra persona mentres tenia sexe,1,no
+neverhaveiever,JO MAI MAI...,he mentit sobre el meu estat civil per a lligar,1,no
+neverhaveiever,JO MAI MAI...,he enviat el mateix nude a diferents persones,1,no
+neverhaveiever,JO MAI MAI...,he lligat o he sigut lligat durant el sexe,1,no
+neverhaveiever,JO MAI MAI...,he fet quelcom vergonyós estant borratxo,1,no
+neverhaveiever,JO MAI MAI...,he fingit un orgasme,1,no
+neverhaveiever,JO MAI MAI...,he lligat amb el cambrer per una copa gratis,1,no
+neverhaveiever,JO MAI MAI...,he mentit jugant al Jo mai mai,1,no
+mostlikelyto,,Qui és més probable que provoqui un incendi,1,no
+mostlikelyto,,Qui és més probable que mati a algú,1,no
+mostlikelyto,,Qui és més probable que acabi a la pressó,1,no
+mostlikelyto,,Qui és més probable que tingui un sugar daddy,1,no
+mostlikelyto,,Qui és la més guarra,1,no
+mostlikelyto,,Qui és la més garrepa,1,no
+mostlikelyto,,Qui és més probable que faci sexting,1,no
+mostlikelyto,,Qui és més probable que estigui amb algú 10 anys major,1,no
+mostlikelyto,,Qui és més probable que estigui amb algú 10 anys menor,1,no
+mostlikelyto,,Qui és més probable que estigui amb més persones alhora,1,no
+mostlikelyto,,Qui és més probable que sigui estafat,1,no
+mostlikelyto,,Qui és més probable que torni amb un ex,1,no
+mostlikelyto,,Qui és més probable que li agradi el BDSM,1,no
+mostlikelyto,,Qui és més probable que participi en una orgia,1,no
+mostlikelyto,,Qui és més probable que lligui aquesta nit,1,no
+mostlikelyto,,Qui és més probable que es mudi per amor,1,no
+mostlikelyto,,Qui és més probable que pagui per sexe,1,no
+mostlikelyto,,Qui és més probable que faci una sextape,1,no
+mostlikelyto,,Qui és més probable que tingués Onlyfans,1,no
+mostlikelyto,,Qui és més probable que malgasti els diners,1,no
+mostlikelyto,,Qui és més probable que mori sol,1,no
+mostlikelyto,,Qui és més probable que cregui en l'horòscop,1,no
+mostlikelyto,,Qui és més probable que enamori a algú només per diversió,1,no
+mostlikelyto,,Qui és més probable que estigui amb algú de la seva feina,1,no
+mostlikelyto,,Qui és més probable que revisi el mòbil de la seva parella,1,no
+mostlikelyto,,Qui és més probable que tingui la col•lecció més gran de joguines sexuals,1,no
+mostlikelyto,,Qui és més probable que vagi a una cita només per el chisme,1,no
+mostlikelyto,,Qui és més probable que tingui un follamic,1,no
+mostlikelyto,,Qui és més probable que estigui en un triangle amorós,1,no
+mostlikelyto,,Qui és més probable que pari durant el sexe per a dir una tonteria,1,no
+joker,DESCANS,No beu ningú,2,no
+joker,COMODÍ,1 Ronda sense beure,2,no
+joker,COMODÍ,"Si no vols beure, ho farà el de la teva esquerra",3,no
+joker,COMODÍ,"Si no vols beure, ho farà el de la teva dreta",3,no
+joker,COMODÍ,"Si no vols beure, ho farà qui tu vulguis",3,no
+rule,NORMA,El primer en riure beu 1,1,no
+rule,NORMA,"El primer en dir ""No"" beu 1",1,no
+rule,NORMA,"El primer en dir ""Si"" beu 1",1,no
+rule,NORMA,El primer en aixecar-se beu 1,1,no
+rule,NORMA,El primer en mirar-te als ulls beu 1,1,no
+rule,NORMA,El primer en mirar el mòbil beu 1,1,no
+rule,NORMA,L'últim en aixecar-se beu 1,1,no
+rule,NORMA,L'últim en aplaudir beu 1,1,no
+rule,NORMA,L'últim en donar un petó beu 1,1,no
+rule,CHING CHONG,Parla amb accent chino. 1 Ronda,1,no
+rule,TACO NACHO,Parla amb accent mexicà. 1 Ronda,1,no
+rule,MIAU MIAU,"Digues ""Miau"" al final de cada frase. 1 Ronda",1,no
+rule,MANCO,Beu sense utilitzar les mans\n\n1 Ronda,1,no
+rule,ENEMIES,"Ja no hi ha noms, per parlar a algú l'has d'insultar. Sinó beu",1,no
+rule,LA NORMA,Fica una norma fins que acabi el joc,1,no
+rule,SOBRENOMS,Fica un sobrenom a un altre jugador,1,no
+rule,SILENCI,Una ronda sense parlar. Beu cada cop que parlis,1,no
+rule,HOTTIES,Tothom s'ha de treure una peça de roba,3,no
+rule,HOTTIES,Tothom intercanvia una peça de roba amb el de la seva esquerra,2,no
+rule,HOTTIES,Tothom intercanvia una peça de roba amb el de la seva dreta,2,no
+rule,LA OLA,Cada cop que beguis tothom ha de fer la ola,1,no
+game,ENEMIES TO LOVERS,"Si primer ha sortit la carta ENEMIES, tothom fa un petó a un altre jugador",1,no
+game,LOVERS TO ENEMIES,"Si primer ha sortit la carta LOVERS, tothom es fa un chupito",1,no
+game,MIRADES,Beuen els jugadors que es mirin a la de 3. 3Rondes,1,no
+game,LA MONEDA,El joc de la moneda. 1 Ronda,1,no
+game,LA CARTA,Fica't una carta als llavis i ha de passar de jugador en jugador fins tornar a tu,1,no
+game,EL POP,Fiqueu la mà a la part del cos que escolliu del jugador de l'esquerra. 3 Rondes,1,no
+game,HIELITO,Agafa un glaçó de gel amb les dents i ha de passar de jugador en jugador fins tornar a tu,1,no
+game,CELESTINA,"Escull a dos jugadors. Si un beu, l'altre també ho fa fins que acabi el joc",1,no
+game,DRESS TO IMPRESS,"Escull l'outfit que més t'agradi, beu l'escollit",1,no
+game,HOTTIES,Escull a un altre jugar que s'ha de treure una peça de roba,3,no
+game,MUACK,Dona-li un petó a un altre jugador,3,no
+game,MUACK,Dona-li un petó al jugador que esculli la resta,2,no
+game,MUACK,Dona-li un petó al jugador de la teva esquerra,2,no
+game,MUACK,Dona-li un petó al jugador de la teva dreta,2,no
+game,CUPIDO,Escull a dos jugadors per a que es donin un petó,3,no
+game,BESTIES,Escull a un altre jugador i els dos us feu un chupito,3,no
+game,CARA O CREU,Escull a un altre jugador. Beu qui perd,1,no
+game,"PEDRA, PAPER O TISSORA",Escull a un altre jugador. Beu qui perd,1,no
+game,LOVERS,Escull a un altre jugador i imiteu una postura sexual,1,no
+game,RANKING,Fes una classificació de totes les copes. Beu la que quedi en últim lloc,1,no
+game,,Anomena 1 país al que hagis viatjat. Beuen els jugadors que també hi hagin viatjat,1,no
+game,,"Anomena 5 exs del grup. Si no pots fer-ho, beu per cada ex que tinguis",1,no
+game,,"Anomena 5 mascotes del grup. Si no pots fer-ho, beu 3",1,no
+game,2 VERITATS 1 MENTIDA,Si descobreixen la mentida beu 1,1,no
+game,GUESS WHO,"Imita a una Spicy. Si ningú ho endevina, beu 3",1,yes
+game,,"Truca a una Spicy no present. Si respon reparteix 3, sinó beu 1",1,yes
+game,PARAULÒGIC,"La resta escull una paraula, si no la lletreges bé, beu 3",1,no
+game,,Tens 30s per dir el nom de totes les persones amb les que has estat. Sinó beu,1,no
+game,EL PETÓ,Tanca els ulls. Un jugador et dona un petó. Beu si no endevines qui és,1,no
+game,LA VOZ,Tarareja una cançó. Beu si ningú l'endevina,1,no
+game,DON JUAN,Digues la teva millor frase per lligar. Sinó beu,1,no
+game,HOT TO GO,Digues que és el que més et posa. Sinó beu,1,no
+game,HOT TO GO,Digues la teva postura sexual preferida. Sinó beu,1,no
+game,HOT TO GO,Explica una fantasia sexual. Sinó beu,1,no
+game,,Digues qui va ser el teu pitjor petó. Sino beu,1,no
+game,,Digues qui va ser el teu millor petó. Sinó beu,1,no
+game,,Deixa el teu mòbil a la resta durant 10s,1,no
+game,,Deixa que enviïn un missatge per tu,1,no
+game,HOTTIES,Treu 1 peça de roba a un altre jugador,3,no
+game,HOTTIES,Treu-te 1 peça de roba,3,no
+game,EL POETA,Parla rimant durant 1 ronda. Sinó beu,1,no
+game,WHAT'S IN MY BAG,La resta escull un jugador. Anomena 5 coses que hi hagi a la seva bossa,1,no
+game,,Mossega una llimona. Sinó beu,1,no
+game,TATTOO,Deixa que un altre jugador et dibuixi un tatuatge,1,no
+game,OLVIDONA,"Respon ""Olvidona"" al primer instastory que t'aparegui",1,no
+game,FUEGUITO,Respon amb un emoji de foc al primer instastory que t'aparegui,1,no
+game,TRUTH OR DARE,Veritat o repte,3,no
+game,CRUSH,Ensenya una foto del teu crush actual,1,no
+game,INFLUENCER,Deixa que un altre jugador publiqui un instastory al teu compte,1,no
+game,INFLUENCER,Publica un instastory amb la primera foto de la teva galeria,1,no
+game,INFLUENCER,Publica un instastory amb l'última foto de la teva galeria,1,no
+game,"OOOH, SI!",Fingeix un orgasme. Sinó beu 3,1,no
