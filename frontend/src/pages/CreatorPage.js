@@ -49,7 +49,7 @@ const CreatorPage = () => {
             />
           </div>
 
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-32">
             <div>
               <label className="block text-gray-700 mb-1">Text Font</label>
               <select
@@ -95,10 +95,16 @@ const CreatorPage = () => {
       </div>
 
       {/* Right Column - Card Preview, Gray Background */}
-      <div className="w-1/2 bg-gray-100 p-8 flex items-center justify-center h-full">
+      <div className="w-1/2 bg-gray-100 p-8 flex items-center justify-center h-full relative">
         <div className="w-2/4 h-3/4 bg-white rounded-lg shadow-md flex items-center justify-center">
           <p className="text-gray-500">Card Preview</p>
         </div>
+
+        {/* Save Button in the Bottom Right Corner */}
+        <button
+          className="absolute bottom-4 right-4 bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300">
+            Guardar
+        </button>
       </div>
     </div>
   );

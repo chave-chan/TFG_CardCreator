@@ -9,7 +9,7 @@ const TextInput = ({ label, value, onChange, placeholder }) => {
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-green-200"
+        className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-200"
       />
     </div>
   );

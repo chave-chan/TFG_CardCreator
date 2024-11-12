@@ -5,7 +5,7 @@ const Button = ({ onClick, label, type = 'button' }) => {
     <button
       onClick={onClick}
       type={type}
-      className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 transition"
+      className="bg-green-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition"
     >
       {label}
     </button>

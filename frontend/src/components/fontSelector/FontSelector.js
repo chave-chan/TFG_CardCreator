@@ -7,7 +7,7 @@ const FontSelector = ({ label, options, value, onChange }) => {
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-green-200"
+        className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-200"
       >
         {options.map((font) => (
           <option key={font} value={font}>
