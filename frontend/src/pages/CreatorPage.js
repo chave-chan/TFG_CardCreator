@@ -34,7 +34,7 @@ const CreatorPage = () => {
     <div className="flex h-screen bg-white">
       {/* Left Column - Creator */}
       <div className="relative w-1/2 bg-white p-8 flex flex-col h-full overflow-y-auto">
-        <h1 className="text-2xl font-semibold mb-4 text-gray-700">Creator</h1>
+        <h1 className="font-caprasimo text-2xl mb-4">Creator</h1>
         <h2 className="text-xl font-semibold mb-4 text-gray-700">Create Your Card</h2>
         <div className="space-y-4">
           <div>
@@ -116,7 +116,7 @@ const CreatorPage = () => {
           {/* Add Button */}
           <button
             onClick={addCard}
-            disabled={isAddDisabled} // Desactiva el botón si falta algún campo
+            disabled={isAddDisabled}
             className={`absolute bottom-4 right-4 py-2 px-8 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 ${
               isAddDisabled ? 'bg-gray-200 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600 text-white'
             }`}
@@ -128,7 +128,7 @@ const CreatorPage = () => {
 
       {/* Right Column - Summary */}
       <div className="w-1/2 bg-gray-100 p-8 h-full flex flex-col relative">
-      <h1 className="text-2xl font-semibold mb-4 text-gray-700">Summary</h1>
+      <h1 className="font-caprasimo text-2xl mb-4">Summary</h1>
         <div className="flex space-x-4 border-b">
           <button
             onClick={() => setActiveView('preview')}

@@ -15,7 +15,7 @@ const MyCardsPage = () => {
 
   return (
     <div className="p-8">
-      <h1 className="text-3xl font-bold mb-6">My Cards</h1>
+      <h1 className="font-caprasimo text-3xl mb-6">My Cards</h1>
       
       {/* Tabs */}
       <div className="flex space-x-4 border-b mb-6">
