@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/header/Header';
+import CardManager from './components/cardManager/CardManager';
 import CreatorPage from './pages/CreatorPage';
 import PdfPreviewPage from './pages/PdfPreviewPage';
 import MyCardsPage from './pages/MyCardsPage';

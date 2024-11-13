@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Document, Page, pdfjs } from 'react-pdf';
 import '@react-pdf-viewer/core/lib/styles/index.css';
 
@@ -7,6 +7,8 @@ pdfjs.GlobalWorkerOptions.workerSrc = `/node_modules/pdfjs-dist/build/pdf.worker
 
 const PdfPreviewPage = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const pdfUrl = location.state?.pdfUrl;
   const [scale, setScale] = useState(1.0);
 
   return (
@@ -36,16 +38,13 @@ const PdfPreviewPage = () => {
 
       {/* PDF Previewer */}
       <div className="flex-1 flex justify-center items-center border rounded-lg shadow mb-4">
-        <div className="w-[210mm] h-[297mm] flex justify-center items-center">
-          <Document
-            file="/path-to-your-pdf-file.pdf"
-            onLoadSuccess={({ numPages }) => console.log(`Loaded PDF with ${numPages} pages`)}
-            onLoadError={(error) => console.error("Failed to load PDF file:", error)}
-            className="flex justify-center mt-8 h-full text-gray-400"
-          >
-            <Page pageNumber={1} scale={scale} />
-          </Document>
-        </div>
+        {pdfUrl ? (
+            <Document file={pdfUrl} className="flex justify-center mt-8 h-full text-gray-400">
+              <Page pageNumber={1} scale={scale} />
+            </Document>
+          ) : (
+            <p className="text-red-500">Cannot load file.</p>
+          )}
       </div>
 
       {/* Back to Creator Button */}

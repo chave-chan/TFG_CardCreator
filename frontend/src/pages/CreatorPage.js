@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { generatePdf } from '../services/apiService';
+import Papa from 'papaparse';
 
 const CreatorPage = () => {
   const [cardType, setCardType] = useState('');
@@ -29,14 +31,82 @@ const CreatorPage = () => {
 
   const isAddDisabled = !cardType || !cardTitle || !cardDescription || !textFont || !textColor;
 
+  const handleCsvUpload = (e) => {
+    const file = e.target.files[0];
+    Papa.parse(file, {
+      header: true,
+      skipEmptyLines: true,
+      complete: (result) => {
+        const csvCards = result.data.map((row) => ({
+          cardType: row.type,
+          cardTitle: row.title,
+          cardDescription: row.text,
+          quantity: row.quantity,
+        }));
+        setCards(csvCards);
+      },
+      error: (error) => console.error("Error al procesar el archivo CSV:", error),
+    });
+  };
+
+  const handleGeneratePdf = async () => {
+    if (cards.length === 0) return;
+
+    const csvData = cards.map((card) => ({
+      type: card.cardType,
+      title: card.cardTitle,
+      text: card.cardDescription,
+      quantity: card.quantity || 1,
+    }));
+
+    const csvContent = Papa.unparse(csvData);
+    const csvBlob = new Blob([csvContent], { type: 'text/csv' });
+    const csvFile = new File([csvBlob], 'cards.csv', { type: 'text/csv' });
+
+    const formData = new FormData();
+    formData.append('csv', csvFile);
+
+    // Add card images to the form data
+    cards.forEach((card, index) => {
+      if (card.cardBackground) {
+        formData.append(`cardBackground_${index}`, card.cardBackground);
+      }
+      if (card.cardBack) {
+        formData.append(`cardBack_${index}`, card.cardBack);
+      }
+    });
+
+    try {
+      // Call the API to generate the PDF
+      const pdfBlob = await generatePdf(formData);
+      const pdfUrl = URL.createObjectURL(pdfBlob);
+      navigate('/pdf-preview', { state: { pdfUrl } });
+    } catch (error) {
+      console.error("Error generating the PDF:", error);
+    }
+  };
 
   return (
     <div className="flex h-screen bg-white">
       {/* Left Column - Creator */}
       <div className="relative w-1/2 bg-white p-8 flex flex-col h-full overflow-y-auto">
         <h1 className="font-caprasimo text-2xl mb-4">Creator</h1>
-        <h2 className="text-xl font-semibold mb-4 text-gray-700">Create Your Card</h2>
+        <h2 className="text-xl font-semibold mb-4 text-gray-700">Upload a CSV file with all your cards</h2>
         <div className="space-y-4">
+          <div>
+            <label className="block text-gray-700 mb-1">CSV file</label>
+            <input
+                type="file"
+                accept=".csv"
+                onChange={handleCsvUpload}
+                className="mb-4"
+              />
+          </div>
+
+          <div>
+            <h2 className="text-xl font-semibold mb-4 text-gray-700">or Create them manually</h2>
+          </div>
+
           <div>
             <label className="block text-gray-700 mb-1">Card Type</label>
             <input
@@ -114,15 +184,18 @@ const CreatorPage = () => {
           </div>
 
           {/* Add Button */}
-          <button
-            onClick={addCard}
-            disabled={isAddDisabled}
-            className={`absolute bottom-4 right-4 py-2 px-8 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 ${
-              isAddDisabled ? 'bg-gray-200 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600 text-white'
-            }`}
-          >
-            Add
-          </button>
+          <div className="flex justify-end mt-4">
+            <button
+              onClick={addCard}
+              disabled={isAddDisabled}
+              className={`py-2 px-8 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 ${
+                isAddDisabled ? 'bg-gray-200 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600 text-white'
+              }`}
+            >
+              Add Card
+            </button>
+          </div>
+          
         </div>
       </div>
 
@@ -168,15 +241,15 @@ const CreatorPage = () => {
           </div>
         )}
 
-        {/* Next Button */}
+        {/* Generate PDF Button */}
         <button
           disabled={cards.length === 0}
-          onClick={() => navigate('/pdf-preview')}
+          onClick={handleGeneratePdf}
           className={`absolute bottom-4 right-4 py-2 px-8 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 ${
             cards.length === 0 ? 'bg-gray-200 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600 text-white'
           }`}
         >
-          Next
+          Generate PDF
         </button>
       </div>
     </div>
