@@ -6,12 +6,13 @@ import {
   CardPreview,
   ColorPicker,
   FileInput,
-  fontSelector,
+  FontSelector,
   TextInput,
 } from "../components";
 import Papa from "papaparse";
 
 const CreatorPage = () => {
+  const [csvFile, setCsvFile] = useState(null);
   const [cardType, setCardType] = useState("");
   const [cardTitle, setCardTitle] = useState("");
   const [cardDescription, setCardDescription] = useState("");
@@ -51,11 +52,11 @@ const CreatorPage = () => {
     setCardBack(null);
   };
 
-  const isAddDisabled =
-    !cardType || !cardTitle || !cardDescription || !textFont || !textColor;
+  const isAddDisabled = (!csvFile || !cardBackground) || (!cardType || !cardTitle || !cardDescription || !cardBackground);
 
   const handleCsvUpload = (e) => {
     const file = e.target.files[0];
+    setCsvFile(file);
     Papa.parse(file, {
       header: true,
       skipEmptyLines: true,
@@ -69,7 +70,7 @@ const CreatorPage = () => {
         setCards(csvCards);
       },
       error: (error) =>
-        console.error("Error al procesar el archivo CSV:", error),
+        console.error("Error processing the CSV file:", error),
     });
   };
 
@@ -114,19 +115,22 @@ const CreatorPage = () => {
     <div className="flex h-screen bg-white">
       {/* Left Column - Creator */}
       <div className="relative w-1/2 bg-white p-8 flex flex-col h-full overflow-y-auto">
-        <h1 className="font-caprasimo text-2xl mb-4">Creator</h1>
-        <h2 className="text-xl font-semibold mb-4 text-gray-700">
+        <h1 className="font-caprasimo text-3xl mb-4">Creator</h1>
+        <h2 className="text-xl font-semibold mb-4 text-gray-700 flex items-center">
           Upload a CSV file with all your cards
+          <div className="relative group ml-2">
+            <div className="flex items-center justify-center w-5 h-5 bg-gray-200 rounded-full text-xs font-bold text-gray-700 cursor-pointer">
+              i
+            </div>
+            <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-48 p-2 bg-gray-200 text-black text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
+              The CSV must have the fields: type, title, text, and quantity.
+            </div>
+          </div>
         </h2>
         <div className="space-y-4">
           <div>
             <label className="block text-gray-700 mb-1">CSV file</label>
-            <input
-              type="file"
-              accept=".csv"
-              onChange={handleCsvUpload}
-              className="mb-4"
-            />
+            <FileInput onChange={handleCsvUpload} />
           </div>
 
           <div>
@@ -158,7 +162,7 @@ const CreatorPage = () => {
           </div>
 
           <div>
-            <label className="block text-gray-700 mb-1">Card Description</label>
+            <label className="block text-gray-700">Card Description</label>
             <textarea
               value={cardDescription}
               onChange={(e) => setCardDescription(e.target.value)}
@@ -182,7 +186,7 @@ const CreatorPage = () => {
               </select>
             </div>
 
-            <div>
+            <div className="w-1/2">
               <label className="block text-gray-700 mb-1">Text Justify</label>
               <select
                 value={textJustify}
@@ -196,7 +200,7 @@ const CreatorPage = () => {
             </div>
           </div>
 
-          <div className="flex items-center space-x-8">
+          <div className="flex items-center space-x-8 w-full">
             <div className="w-1/2">
               <label className="block text-gray-700 mb-1">Text Font</label>
               <select
@@ -210,12 +214,14 @@ const CreatorPage = () => {
               </select>
             </div>
 
-            <div>
-              <label className="block text-gray-700 mb-1">Text Color</label>
-              <ColorPicker
-                value={textColor}
-                onChange={(e) => setTextColor(e.target.value)}
-              />
+            <div className="w-1/2">
+              <div className="w-1/4">
+                <label className="block text-gray-700 mb-1">Text Color</label>
+                <ColorPicker
+                  value={textColor}
+                  onChange={(e) => setTextColor(e.target.value)}
+                />
+              </div>
             </div>
           </div>
 
@@ -240,7 +246,7 @@ const CreatorPage = () => {
 
       {/* Right Column - Summary */}
       <div className="w-1/2 bg-gray-100 p-8 h-full flex flex-col relative">
-        <h1 className="font-caprasimo text-2xl mb-4">Summary</h1>
+        <h1 className="font-caprasimo text-3xl mb-4">Summary</h1>
         <div className="flex space-x-4 border-b">
           <button
             onClick={() => setActiveView("preview")}
