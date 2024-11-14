@@ -20,16 +20,36 @@ export const loginWithGoogle = async (token) => {
     }
 };
 
+export const previewCard = async (cardData) => {
+    try {
+        const response = await fetch(`${API_BASE_URL}/cards/preview`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(cardData),
+        });
+        if (!response.ok) {
+            throw new Error("Error getting the card preview");
+        }
+        const blob = await response.blob();
+        return URL.createObjectURL(blob);
+    } catch (error) {
+        console.error("Error getting the card preview:", error);
+        throw error;
+    }
+};
+
 export const getCards = async () => {
     try {
         const response = await fetch(`${API_BASE_URL}/cards`);
         if (!response.ok) {
-            throw new Error("Error al obtener las cartas");
+            throw new Error("Error getting the cards");
         }
         const data = await response.json();
         return data;
     } catch (error) {
-        console.error("Error al obtener las cartas:", error);
+        console.error("Error getting the cards:", error);
         throw error;
     }
 };
@@ -44,12 +64,12 @@ export const generatePdf = async (csvFilePath) => {
             body: JSON.stringify({ csv_file_path: csvFilePath }),
         });
         if (!response.ok) {
-            throw new Error("Error al generar el PDF");
+            throw new Error("Error generating PDF");
         }
         const data = await response.blob();
         return data; // Returns blob
     } catch (error) {
-        console.error("Error al generar el PDF:", error);
+        console.error("Error generating PDF:", error);
         throw error;
     }
 };

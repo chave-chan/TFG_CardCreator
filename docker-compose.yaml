@@ -10,6 +10,9 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
+    environment:
+      GOOGLE_CLIENT_ID: 149316053799-cbe25scsp27djpkjfn1upcbfekp4qrfa.apps.googleusercontent.com
+      GOOGLE_CLIENT_SECRET: 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
     ports:
       - "8000:8000"  # Maps port 8000 of the container to port 8000 of the machine
     volumes:

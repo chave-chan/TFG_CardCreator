@@ -70,35 +70,33 @@ With the virtual environment activated, install the project dependencies from th
 pip install -r requirements.txt
 ```
 
-### 4. Organize the Datasets
-
-Since the datasets are too large to be uploaded to GitHub, you will need to manually download them from the course platform.
-
-1. **Download the csv with the cards information**
-
-2. **Place the csv in the `data/` folder**:
-
-   Your `data/` folder should look like this:
-
-   ```
-   CardCreator/
-   ├── data/
-   │   ├── cards.csv
-   │   └── cards.pdf        # Gereated pdf with the card game
-   ```
-
-### 5. Run the Project
-
-Once the datasets are organized and the dependencies are installed, you can run the project with the following command:
+### 4. Build and Up the Docker
 
 ```bash
-python3 main.py
+docker-compose build --no-cache
 ```
 
-This will generate a pdf with all the cards.
+```bash
+docker-compose up -d
+```
 
+### 5. Run the project localy
 
-### 7. Deactivate the Virtual Environment
+# Frontend
+Go to the frontend directory
+
+```bash
+npm start
+```
+
+# Backend
+Go to the backend directory
+
+```bash
+uvicorn app.main:app --host 0.0.0.0 --port 8000
+```
+
+### 6. Deactivate the Virtual Environment
 
 When you are done working on the project, you can deactivate the virtual environment by running:
 
@@ -107,7 +105,3 @@ deactivate
 ```
 
 This will return your terminal to its default Python environment.
-
-
-
-
