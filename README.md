@@ -82,14 +82,14 @@ docker-compose up -d
 
 ### 5. Run the project localy
 
-# Frontend
+#### Frontend
 Go to the frontend directory
 
 ```bash
 npm start
 ```
 
-# Backend
+#### Backend
 Go to the backend directory
 
 ```bash
