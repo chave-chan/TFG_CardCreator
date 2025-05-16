@@ -1,21 +1,13 @@
 import sys
 import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from fastapi import APIRouter, HTTPException, Response, Query
+from fastapi import APIRouter, HTTPException, Query
 from fastapi.responses import StreamingResponse
+from io import BytesIO
 import pandas as pd
-from app.services.card_service import generate_single_card
 from app.services.card_service import generate_pdf 
 
 router = APIRouter()
-
-@router.post("/cards/preview")
-async def preview_card(card_data: dict):
-    try:
-        card_image = generate_single_card(card_data)
-        return Response(content=card_image.getvalue(), media_type="image/png")
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error generating card preview: {str(e)}")
 
 @router.post("/generate_pdf")
 async def generate_pdf_endpoint(

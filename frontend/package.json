@@ -4,12 +4,11 @@
   "private": true,
   "license": "UNLICENSED",
   "dependencies": {
-    "@react-pdf-viewer/core": "^3.12.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "papaparse": "^5.4.1",
-    "pdfjs-dist": "^2.16.105",
+    "pdfjs-dist": "^5.2.133",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-pdf": "^9.1.1",

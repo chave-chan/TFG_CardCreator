@@ -56,22 +56,6 @@ def create_card_image_buffer(card_type, title, text, text_align, text_justify, t
     png_data = convert_svg_to_png(image_path)
     return create_card(png_data, title, text, text_align, text_justify, text_color)
 
-# Generate a single card
-def generate_single_card(card_data):
-    card_image_buffer = create_card_image_buffer(
-        card_type=card_data["type"],
-        title=card_data["title"],
-        text=card_data["text"],
-        text_align=card_data.get("text_align", "center"),
-        text_justify=card_data.get("text_justify", "center"),
-        text_color=card_data.get("text_color", "#000000")
-    )
-
-    img_bytes = io.BytesIO()
-    card_image_buffer.save(img_bytes, format="PNG")
-    img_bytes.seek(0)
-    return img_bytes
-
 # Create the card in memory using SVG converted to PNG
 def create_card(card_image, title, text, text_align, text_justify, text_color):
     title = str(title) if pd.notnull(title) else ""

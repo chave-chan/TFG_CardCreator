@@ -13,9 +13,6 @@ RUN pip install -r requirements.txt
 # Copia el resto del código
 COPY . .
 
-# Copia el archivo de entorno
-COPY .env .env
-
 # Expone el puerto 8000 para FastAPI
 EXPOSE 8000
 

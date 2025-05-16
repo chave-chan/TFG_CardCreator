@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Document, Page, pdfjs } from 'react-pdf';
-import '@react-pdf-viewer/core/lib/styles/index.css';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `/node_modules/pdfjs-dist/build/pdf.worker.min.js`;
 
