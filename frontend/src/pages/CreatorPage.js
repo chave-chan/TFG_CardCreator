@@ -16,7 +16,7 @@ const CreatorPage = () => {
   const [cardType, setCardType] = useState("");
   const [cardTitle, setCardTitle] = useState("");
   const [cardDescription, setCardDescription] = useState("");
-  const [cardQuantity, setCardQuantity] = useState("");
+  const [cardQuantity, setCardQuantity] = useState("1");
   const [textFont, setTextFont] = useState("Arial");
   const [textColor, setTextColor] = useState("#000000");
   const [textAlign, setTextAlign] = useState("center");
@@ -41,12 +41,13 @@ const CreatorPage = () => {
       cardBackground,
       cardBack,
     };
+    console.log(">>> newCard complete object:", newCard);
     setCards([...cards, newCard]);
     // Clear form
     setCardType("");
     setCardTitle("");
     setCardDescription("");
-    setCardQuantity("");
+    setCardQuantity("1");
     setTextFont("Arial");
     setTextColor("#000000");
     setTextAlign("center");
@@ -55,7 +56,7 @@ const CreatorPage = () => {
     setCardBack(null);
   };
 
-  const isAddDisabled = (!csvFile || !cardBackground) || (!cardType || !cardTitle || !cardDescription || !cardQuantity || !cardBackground);
+  const isAddDisabled = (!csvFile && !cardBackground) || (!cardType && !cardTitle && !cardDescription && !cardBackground);
 
   const handleCsvUpload = (e) => {
     const file = e.target.files[0];
@@ -148,7 +149,10 @@ const CreatorPage = () => {
               <input
                 type="text"
                 value={cardType}
-                onChange={(e) => setCardType(e.target.value)}
+                onChange={(e) => {
+                 console.log(">>> Card Type:", e.target.value); /// TESTING
+                 setCardType(e.target.value);
+               }}
                 className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-200"
                 placeholder="Enter card type"
               />
@@ -158,7 +162,10 @@ const CreatorPage = () => {
               <input
                 type="number"
                 value={cardQuantity}
-                onChange={(e) => setCardQuantity(e.target.value)}
+                onChange={(e) => {
+                 console.log(">>> Card Quantity:", e.target.value); /// TESTING
+                 setCardQuantity(e.target.value);
+               }}
                 className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-200"
                 placeholder="Enter card quantity"
                 min="1"
@@ -171,7 +178,10 @@ const CreatorPage = () => {
             <input
               type="text"
               value={cardTitle}
-              onChange={(e) => setCardTitle(e.target.value)}
+              onChange={(e) => {
+               console.log(">>> Card Title:", e.target.value); /// TESTING
+               setCardTitle(e.target.value);
+             }}
               className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-200"
               placeholder="Enter card title"
             />
@@ -181,7 +191,10 @@ const CreatorPage = () => {
             <label className="block text-gray-700">Card Description</label>
             <textarea
               value={cardDescription}
-              onChange={(e) => setCardDescription(e.target.value)}
+              onChange={(e) => {
+               console.log(">>> Card Description:", e.target.value); /// TESTING
+               setCardDescription(e.target.value);
+             }}
               className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-200 resize-none"
               placeholder="Enter card description"
               rows="4"

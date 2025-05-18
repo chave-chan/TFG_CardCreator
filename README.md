@@ -89,11 +89,18 @@ Go to the frontend directory
 npm start
 ```
 
-#### Backend
-Go to the backend directory
+If a 'file is missing' message appears, try:
 
 ```bash
-uvicorn app.main:app --host 0.0.0.0 --port 8000
+npm install
+npm start
+```
+
+#### Backend
+Go to the backend/app directory
+
+```bash
+uvicorn main:app --host 0.0.0.0 --port 8000
 ```
 
 ### 6. Deactivate the Virtual Environment
