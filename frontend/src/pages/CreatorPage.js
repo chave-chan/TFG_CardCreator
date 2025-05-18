@@ -16,6 +16,7 @@ const CreatorPage = () => {
   const [cardType, setCardType] = useState("");
   const [cardTitle, setCardTitle] = useState("");
   const [cardDescription, setCardDescription] = useState("");
+  const [cardQuantity, setCardQuantity] = useState("");
   const [textFont, setTextFont] = useState("Arial");
   const [textColor, setTextColor] = useState("#000000");
   const [textAlign, setTextAlign] = useState("center");
@@ -32,6 +33,7 @@ const CreatorPage = () => {
       cardType,
       cardTitle,
       cardDescription,
+      cardQuantity,
       textFont,
       textColor,
       textAlign,
@@ -44,6 +46,7 @@ const CreatorPage = () => {
     setCardType("");
     setCardTitle("");
     setCardDescription("");
+    setCardQuantity("");
     setTextFont("Arial");
     setTextColor("#000000");
     setTextAlign("center");
@@ -52,7 +55,7 @@ const CreatorPage = () => {
     setCardBack(null);
   };
 
-  const isAddDisabled = (!csvFile || !cardBackground) || (!cardType || !cardTitle || !cardDescription || !cardBackground);
+  const isAddDisabled = (!csvFile || !cardBackground) || (!cardType || !cardTitle || !cardDescription || !cardQuantity || !cardBackground);
 
   const handleCsvUpload = (e) => {
     const file = e.target.files[0];
@@ -65,7 +68,7 @@ const CreatorPage = () => {
           cardType: row.type,
           cardTitle: row.title,
           cardDescription: row.text,
-          quantity: row.quantity,
+          cardQuantity: row.quantity,
         }));
         setCards(csvCards);
       },
@@ -81,7 +84,7 @@ const CreatorPage = () => {
       type: card.cardType,
       title: card.cardTitle,
       text: card.cardDescription,
-      quantity: card.quantity || 1,
+      quantity: parseInt(card.cardQuantity, 10) || 1,
     }));
 
     const csvContent = Papa.unparse(csvData);
@@ -139,15 +142,28 @@ const CreatorPage = () => {
             </h2>
           </div>
 
-          <div>
-            <label className="block text-gray-700 mb-1">Card Type</label>
-            <input
-              type="text"
-              value={cardType}
-              onChange={(e) => setCardType(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-200"
-              placeholder="Enter card type"
-            />
+          <div className="flex space-x-4">
+            <div className="w-1/2">
+              <label className="block text-gray-700 mb-1">Card Type</label>
+              <input
+                type="text"
+                value={cardType}
+                onChange={(e) => setCardType(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-200"
+                placeholder="Enter card type"
+              />
+            </div>
+            <div className="w-1/2">
+              <label className="block text-gray-700 mb-1">Card Quantity</label>
+              <input
+                type="number"
+                value={cardQuantity}
+                onChange={(e) => setCardQuantity(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-200"
+                placeholder="Enter card quantity"
+                min="1"
+              />
+            </div>
           </div>
 
           <div>
@@ -170,6 +186,12 @@ const CreatorPage = () => {
               placeholder="Enter card description"
               rows="4"
             />
+          </div>
+
+          <div>
+            <h2 className="text-xl font-semibold mb-4 text-gray-700">
+              Card Settings
+            </h2>
           </div>
 
           <div className="flex items-center w-full space-x-8">

@@ -1,5 +1,26 @@
 const API_BASE_URL = "http://localhost:8000/api/v1"; // Backend API URL
 
+/// TESTING
+
+export const postTestCard = async (card) => {
+  const res = await fetch(`${API_BASE_URL}/cards/test-card`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(card),
+  });
+  return await res.json();
+};
+
+export const getTestCards = async () => {
+  const res = await fetch(`${API_BASE_URL}/cards/test-cards`);
+  console.log("GET /test-cards status:", res.status, "OK?", res.ok);
+  const json = await res.json();
+  console.log("GET /test-cards body:", json);
+  return json;
+};
+
+///
+
 export const loginWithGoogle = async (token) => {
     try {
         const response = await fetch(`${API_BASE_URL}/auth/login`, {

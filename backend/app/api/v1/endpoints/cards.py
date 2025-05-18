@@ -1,13 +1,27 @@
 import sys
 import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from fastapi import APIRouter, HTTPException, Query
-from fastapi.responses import StreamingResponse
+from fastapi import APIRouter, HTTPException, UploadFile, File, Body, Query
+from fastapi.responses import JSONResponse, StreamingResponse
 from io import BytesIO
 import pandas as pd
 from app.services.card_service import generate_pdf 
 
 router = APIRouter()
+
+### TESTING
+test_cards: list[dict] = []
+
+@router.post("/test-card")
+async def post_test_card(card: dict = Body(...)):
+    test_cards.append(card)
+    return {"stored": card}
+
+@router.get("/test-cards")
+async def get_test_cards():
+    return test_cards
+
+###
 
 @router.post("/generate_pdf")
 async def generate_pdf_endpoint(
