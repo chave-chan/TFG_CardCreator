@@ -1,6 +1,7 @@
 # 1) Entorno virtual de Python
 env/
 __pycache__/
+**/__pycache__/
 *.py[cod]
 *.so
 
@@ -33,6 +34,9 @@ coverage/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+*.log
+*.lock
+*.sqlite
 
 # 7) IDEs y SO
 .DS_Store
@@ -41,3 +45,4 @@ yarn-error.log*
 # 8) PnP
 .pnp
 .pnp.js
+node_modules
