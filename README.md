@@ -97,10 +97,10 @@ npm start
 ```
 
 #### Backend
-Go to the backend/app directory
+Go to the backend directory
 
 ```bash
-uvicorn main:app --host 0.0.0.0 --port 8000
+uvicorn app.main:app --host 0.0.0.0 --port 8000
 ```
 
 ### 6. Deactivate the Virtual Environment
