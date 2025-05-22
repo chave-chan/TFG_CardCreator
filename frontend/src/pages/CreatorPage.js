@@ -56,7 +56,7 @@ const CreatorPage = () => {
     setCardBack(null);
   };
 
-  const isAddDisabled = (!csvFile && !cardBackground) || (!cardType && !cardTitle && !cardDescription && !cardBackground);
+  const isAddDisabled = (!csvFile && !cardBackground) || (!cardType.trim() && !cardTitle.trim() && !cardDescription.trim() && !cardBackground);
 
   const handleCsvUpload = (e) => {
     const file = e.target.files[0];

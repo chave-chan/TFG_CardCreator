@@ -1,18 +1,27 @@
 import React, { useState, useEffect } from "react";
-import { previewCard } from "../../services/apiService";
+import { previewCard as fetchPreview } from "../../services/apiService";
 
 const CardPreview = ({ card }) => {
   const [previewUrl, setPreviewUrl] = useState(null);
 
   useEffect(() => {
-    const loadPreview = async () => {
-      if (card) {
-        try {
-          const url = await previewCard(card);
-          setPreviewUrl(url);
-        } catch (error) {
-          console.error("Error getting the card preview:", error);
-        }
+  const loadPreview = async () => {
+      if (!card) return;
+      try {
+        const payload = {
+          type: card.cardType,
+          title: card.cardTitle,
+          text: card.cardDescription,
+          text_align: card.textAlign,
+          text_justify: card.textJustify,
+          text_color: card.textColor,
+        };
+        console.log("Preview payload:", payload); // TESTING
+        const data = await fetchPreview(payload);
+        console.log("Preview data:", data); // TESTING
+        setPreviewUrl(data.image);
+      } catch (error) {
+        console.error("Error getting the card preview:", error);
       }
     };
     loadPreview();
