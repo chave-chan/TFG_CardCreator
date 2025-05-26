@@ -1,11 +1,11 @@
 import sys, os, base64
 import traceback
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from fastapi import APIRouter, HTTPException, UploadFile, File, Body, Query
+from fastapi import APIRouter, HTTPException, UploadFile, File, Body, Query, Form
 from fastapi.responses import JSONResponse, StreamingResponse
 from io import BytesIO
 import pandas as pd
-from app.services.card_service import generate_pdf, generate_single_card
+from app.services.card_service import generate_pdf, generate_single_card, generate_preview_from_svg
 
 router = APIRouter()
 
@@ -24,15 +24,31 @@ async def get_test_cards():
 ###
 
 @router.post("/preview")
-async def preview_card(card_data: dict = Body(...)):
+async def preview_card(
+    type:        str         = Form(...),
+    title:       str         = Form(""),
+    text:        str         = Form(""),
+    text_align:  str         = Form("center"),
+    text_justify:str         = Form("center"),
+    text_color:  str         = Form("#000000"),
+    svg_file:    UploadFile  = File(...)
+    ):
     try:
-        img_buf = generate_single_card(card_data)
-        b64 = base64.b64encode(img_buf.getvalue()).decode()
+        svg_bytes = await svg_file.read()
+        png_b64 = generate_preview_from_svg(
+            svg_bytes,
+            title,
+            text,
+            text_align,
+            text_justify,
+            text_color
+        )
+
         return JSONResponse({
-            "image": f"data:image/png;base64,{b64}",
-            "title": card_data.get("title", "Untitled"),
-            "text": card_data.get("text", ""),
-            "type": card_data.get("type", ""),
+            "image": f"data:image/png;base64,{png_b64}",
+            "title": title,
+            "text":  text,
+            "type":  type,
         })
     except Exception as e:
         print("⚠️ Error preview_card:", e) ### DEBUG

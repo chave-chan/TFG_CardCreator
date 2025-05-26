@@ -22,13 +22,14 @@ const CreatorPage = () => {
   const [textAlign, setTextAlign] = useState("center");
   const [textJustify, setTextJustify] = useState("center");
   const [cardBackground, setCardBackground] = useState(null);
-  const [cardBack, setCardBack] = useState(null);
+  //const [cardBack, setCardBack] = useState(null);
   const [cards, setCards] = useState([]);
   const [activeView, setActiveView] = useState("preview");
 
   const navigate = useNavigate();
 
   const addCard = () => {
+    const cardQuantityNumber = parseInt(cardQuantity, 10) || 1;
     const newCard = {
       cardType,
       cardTitle,
@@ -39,11 +40,10 @@ const CreatorPage = () => {
       textAlign,
       textJustify,
       cardBackground,
-      cardBack,
+      //cardBack,
     };
-    console.log(">>> newCard complete object:", newCard);
-    setCards([...cards, newCard]);
-    // Clear form
+    const newCards = Array.from({ length: cardQuantityNumber }, () => ({ ...newCard }));
+    setCards(prev => [...prev, ...newCards]);
     setCardType("");
     setCardTitle("");
     setCardDescription("");
@@ -53,7 +53,7 @@ const CreatorPage = () => {
     setTextAlign("center");
     setTextJustify("center");
     setCardBackground(null);
-    setCardBack(null);
+    //setCardBack(null);
   };
 
   const isAddDisabled = (!csvFile && !cardBackground) || (!cardType.trim() && !cardTitle.trim() && !cardDescription.trim() && !cardBackground);
@@ -100,9 +100,11 @@ const CreatorPage = () => {
       if (card.cardBackground) {
         formData.append(`cardBackground_${index}`, card.cardBackground);
       }
+      /*
       if (card.cardBack) {
         formData.append(`cardBack_${index}`, card.cardBack);
       }
+      */
     });
 
     try {
@@ -118,7 +120,8 @@ const CreatorPage = () => {
   return (
     <div className="flex h-screen bg-white">
       {/* Left Column - Creator */}
-      <div className="relative w-1/2 bg-white p-8 flex flex-col h-full overflow-y-auto">
+      <div className="w-1/2 bg-white p-8 flex flex-col h-full">
+      <div>
         <h1 className="font-caprasimo text-3xl mb-4">Creator</h1>
         <h2 className="text-xl font-semibold mb-4 text-gray-700 flex items-center">
           Upload a CSV file with all your cards
@@ -131,7 +134,8 @@ const CreatorPage = () => {
             </div>
           </div>
         </h2>
-        <div className="space-y-4">
+      </div>
+        <div className="space-y-4 flex-1 overflow-y-auto">
           <div>
             <label className="block text-gray-700 mb-1">CSV file</label>
             <FileInput onChange={handleCsvUpload} />
@@ -150,9 +154,8 @@ const CreatorPage = () => {
                 type="text"
                 value={cardType}
                 onChange={(e) => {
-                 console.log(">>> Card Type:", e.target.value); /// TESTING
-                 setCardType(e.target.value);
-               }}
+                  setCardType(e.target.value);
+                }}
                 className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-200"
                 placeholder="Enter card type"
               />
@@ -161,14 +164,13 @@ const CreatorPage = () => {
               <label className="block text-gray-700 mb-1">Card Quantity</label>
               <input
                 type="number"
+                min="1"
                 value={cardQuantity}
                 onChange={(e) => {
-                 console.log(">>> Card Quantity:", e.target.value); /// TESTING
                  setCardQuantity(e.target.value);
                }}
                 className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-200"
                 placeholder="Enter card quantity"
-                min="1"
               />
             </div>
           </div>
@@ -179,7 +181,6 @@ const CreatorPage = () => {
               type="text"
               value={cardTitle}
               onChange={(e) => {
-               console.log(">>> Card Title:", e.target.value); /// TESTING
                setCardTitle(e.target.value);
              }}
               className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-200"
@@ -192,7 +193,6 @@ const CreatorPage = () => {
             <textarea
               value={cardDescription}
               onChange={(e) => {
-               console.log(">>> Card Description:", e.target.value); /// TESTING
                setCardDescription(e.target.value);
              }}
               className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-200 resize-none"
@@ -202,8 +202,16 @@ const CreatorPage = () => {
           </div>
 
           <div>
-            <h2 className="text-xl font-semibold mb-4 text-gray-700">
+            <h2 className="text-xl font-semibold mb-4 text-gray-700 flex items-center">
               Card Settings
+              <div className="relative group ml-2">
+                <div className="flex items-center justify-center w-5 h-5 bg-gray-200 rounded-full text-xs font-bold text-gray-700 cursor-pointer">
+                  i
+                </div>
+                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-48 p-2 bg-gray-200 text-black text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
+                  The Card Background image must be SVG file.
+                </div>
+              </div>
             </h2>
           </div>
 
@@ -265,13 +273,13 @@ const CreatorPage = () => {
             <FileInput onChange={(e) => setCardBackground(e.target.files[0])} />
           </div>
 
-          <div>
+          {/* <div>
             <label className="block text-gray-700 mb-1">Card Back</label>
             <FileInput onChange={(e) => setCardBack(e.target.files[0])} />
-          </div>
+          </div> */}
 
           {/* Add Card Button */}
-          <div className="flex justify-end mt-4">
+          <div className="flex justify-end mt-auto">
             <Button onClick={addCard} disabled={isAddDisabled}>
               Add Card
             </Button>
@@ -280,60 +288,64 @@ const CreatorPage = () => {
       </div>
 
       {/* Right Column - Summary */}
-      <div className="w-1/2 bg-gray-100 p-8 h-full flex flex-col relative">
-        <h1 className="font-caprasimo text-3xl mb-4">Summary</h1>
-        <div className="flex space-x-4 border-b">
-          <button
-            onClick={() => setActiveView("preview")}
-            className={`pb-2 ${
-              activeView === "preview"
-                ? "border-b-2 border-blue-500 font-semibold"
-                : "text-gray-500"
-            }`}
-          >
-            Preview
-          </button>
-          <button
-            onClick={() => setActiveView("list")}
-            className={`pb-2 ${
-              activeView === "list"
-                ? "border-b-2 border-blue-500 font-semibold"
-                : "text-gray-500"
-            }`}
-          >
-            Cards List
-          </button>
+      <div className="w-1/2 bg-gray-100 p-8 h-full flex flex-col">
+        <div>
+          <h1 className="font-caprasimo text-3xl mb-4">Summary</h1>
+          <div className="flex space-x-4 border-b">
+            <button
+              onClick={() => setActiveView("preview")}
+              className={`pb-2 ${
+                activeView === "preview"
+                  ? "border-b-2 border-blue-500 font-semibold"
+                  : "text-gray-500"
+              }`}
+            >
+              Preview
+            </button>
+            <button
+              onClick={() => setActiveView("list")}
+              className={`pb-2 ${
+                activeView === "list"
+                  ? "border-b-2 border-blue-500 font-semibold"
+                  : "text-gray-500"
+              }`}
+            >
+              Cards List
+            </button>
+          </div>
         </div>
 
         {/* Conditionally render based on activeView */}
-        {activeView === "preview" ? (
-          <div className="flex-1 flex items-center justify-center">
-            <CardPreview card={cards[0]} />
-          </div>
-        ) : (
-          <div className="w-full h-full overflow-y-auto mt-4">
-            {cards.length > 0 ? (
-              <ul className="space-y-2">
-                {cards.map((card, index) => (
-                  <li
-                    key={index}
-                    className="border p-4 rounded-lg bg-white shadow"
-                  >
-                    <h3 className="text-lg font-semibold">{card.cardTitle}</h3>
-                    <p>{card.cardDescription}</p>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p className="text-gray-400 text-center mt-4">
-                No cards added yet.
-              </p>
-            )}
-          </div>
-        )}
-
+        <div className="flex-1 overflow-y-auto mt-4">
+          {activeView === "preview" ? (
+            <div className="flex-1 flex items-center justify-center">
+              {cards.length > 0 && <CardPreview card={cards[cards.length - 1]} />}
+            </div>
+          ) : (
+            <div className="flex-1 overflow-y-auto mt-4">
+              {cards.length > 0 ? (
+                <ul className="space-y-2">
+                  {cards.map((card, index) => (
+                    <li
+                      key={index}
+                      className="border p-4 rounded-lg bg-white shadow"
+                    >
+                      <h3 className="text-lg font-semibold">{card.cardTitle}</h3>
+                      <p>{card.cardDescription}</p>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-gray-400 text-center mt-4">
+                  No cards added yet.
+                </p>
+              )}
+            </div>
+          )}
+        </div>
+        
         {/* Generate PDF Button */}
-        <div className="flex justify-end mt-4">
+        <div className="flex justify-end mt-auto">
           <Button disabled={cards.length === 0} onClick={handleGeneratePdf}>
             Generate PDF
           </Button>

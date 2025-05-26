@@ -41,24 +41,25 @@ export const loginWithGoogle = async (token) => {
     }
 };
 
-export const previewCard = async (cardData) => {
-    try {
-        const response = await fetch(`${API_BASE_URL}/cards/preview`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(cardData),
-        });
-        if (!response.ok) {
-            throw new Error("Error getting the card preview");
-        }
-        const blob = await response.blob();
-        return URL.createObjectURL(blob);
-    } catch (error) {
-        console.error("Error getting the card preview:", error);
-        throw error;
-    }
+export const previewCard = async ({ 
+  type, title, text, text_align, text_justify, text_color, svgFile 
+}) => {
+  const form = new FormData();
+  form.append("type",         type);
+  form.append("title",        title);
+  form.append("text",         text);
+  form.append("text_align",   text_align);
+  form.append("text_justify", text_justify);
+  form.append("text_color",   text_color);
+  form.append("svg_file",     svgFile, svgFile.name);
+
+  const res = await fetch(`${API_BASE_URL}/cards/preview`, {
+    method: "POST",
+    body: form,
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.detail || "Error getting the card preview");
+  return data;
 };
 
 export const getCards = async () => {

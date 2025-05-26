@@ -11,6 +11,7 @@ from concurrent.futures import ProcessPoolExecutor
 from functools import lru_cache
 import textwrap
 import cairosvg
+import base64
 
 # CARD SETTINGS
 CARD_WIDTH = 63 * mm # Standard card size
@@ -28,6 +29,30 @@ TEXT_FONT = "/System/Library/Fonts/Supplemental/Futura.ttc"
 TEXT_SIZE = 320
 
 ### IMAGE GENERATION ###
+#Generate a preview image from SVG data
+def generate_preview_from_svg(
+    svg_bytes: bytes,
+    title: str,
+    text: str,
+    text_align: str,
+    text_justify: str,
+    text_color: str
+) -> str:
+    png_bytes = cairosvg.svg2png(bytestring=svg_bytes, dpi=96)
+    
+    img = create_card(
+        card_image=png_bytes,
+        title=title,
+        text=text,
+        text_align=text_align,
+        text_justify=text_justify,
+        text_color=text_color,
+    )
+    
+    buf = io.BytesIO()
+    img.save(buf, format="PNG")
+    return base64.b64encode(buf.getvalue()).decode()
+
 # Convert SVG to PNG in memory
 @lru_cache(maxsize=32)
 def convert_svg_to_png(image_path):
@@ -52,7 +77,7 @@ def round_rectangle(draw, top_left, bottom_right, radius, fill):
 # Create the card image buffer
 @lru_cache(maxsize=32)
 def create_card_image_buffer(card_type, title, text, text_align, text_justify, text_color):
-    image_path = f'script/images/svg/{card_type}.svg'
+    image_path = f'images/svg/{card_type}.svg'
     png_data = convert_svg_to_png(image_path)
     return create_card(png_data, title, text, text_align, text_justify, text_color)
 
