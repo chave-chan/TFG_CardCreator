@@ -81,12 +81,20 @@ const CreatorPage = () => {
   const handleGeneratePdf = async () => {
     if (cards.length === 0) return;
 
-    const csvData = cards.map((card) => ({
+    const lastCard = cards[cards.length - 1];
+    const background = lastCard.cardBackground; 
+
+    if (!background) {
+      console.warn("No background");
+      return;
+    }
+
+    const csvData = cards.map(card => ({
       type: card.cardType,
       title: card.cardTitle,
       text: card.cardDescription,
       quantity: parseInt(card.cardQuantity, 10) || 1,
-    }));
+    }))
 
     const csvContent = Papa.unparse(csvData);
     const csvBlob = new Blob([csvContent], { type: "text/csv" });
@@ -94,22 +102,11 @@ const CreatorPage = () => {
 
     const formData = new FormData();
     formData.append("csv", csvFile);
-
-    // Add card images to the form data
-    cards.forEach((card, index) => {
-      if (card.cardBackground) {
-        formData.append(`cardBackground_${index}`, card.cardBackground);
-      }
-      /*
-      if (card.cardBack) {
-        formData.append(`cardBack_${index}`, card.cardBack);
-      }
-      */
-    });
+    formData.append("background", background, background.name);
 
     try {
       // Call the API to generate the PDF
-      const pdfBlob = await generatePdf(formData);
+      const pdfBlob = await generatePdf({ formData, textAlign, textJustify, textColor});
       const pdfUrl = URL.createObjectURL(pdfBlob);
       navigate("/pdf-preview", { state: { pdfUrl } });
     } catch (error) {
@@ -288,7 +285,7 @@ const CreatorPage = () => {
       </div>
 
       {/* Right Column - Summary */}
-      <div className="w-1/2 bg-gray-100 p-8 h-full flex flex-col">
+      <div className="w-1/2 bg-gray-100 p-8 h-full flex flex-col min-h-0">
         <div>
           <h1 className="font-caprasimo text-3xl mb-4">Summary</h1>
           <div className="flex space-x-4 border-b">
@@ -316,9 +313,9 @@ const CreatorPage = () => {
         </div>
 
         {/* Conditionally render based on activeView */}
-        <div className="flex-1 overflow-y-auto mt-4">
+        <div className="flex-1 flex flex-col mt-4 min-h-0">
           {activeView === "preview" ? (
-            <div className="flex-1 flex items-center justify-center">
+            <div className="flex-1 flex items-center justify-center min-h-0">
               {cards.length > 0 && <CardPreview card={cards[cards.length - 1]} />}
             </div>
           ) : (
@@ -345,7 +342,7 @@ const CreatorPage = () => {
         </div>
         
         {/* Generate PDF Button */}
-        <div className="flex justify-end mt-auto">
+        <div className="flex justify-end mt-4">
           <Button disabled={cards.length === 0} onClick={handleGeneratePdf}>
             Generate PDF
           </Button>

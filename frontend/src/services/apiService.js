@@ -1,26 +1,5 @@
 const API_BASE_URL = "http://localhost:8000/api/v1"; // Backend API URL
 
-/// TESTING
-
-export const postTestCard = async (card) => {
-  const res = await fetch(`${API_BASE_URL}/cards/test-card`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(card),
-  });
-  return await res.json();
-};
-
-export const getTestCards = async () => {
-  const res = await fetch(`${API_BASE_URL}/cards/test-cards`);
-  console.log("GET /test-cards status:", res.status, "OK?", res.ok);
-  const json = await res.json();
-  console.log("GET /test-cards body:", json);
-  return json;
-};
-
-///
-
 export const loginWithGoogle = async (token) => {
     try {
         const response = await fetch(`${API_BASE_URL}/auth/login`, {
@@ -76,22 +55,20 @@ export const getCards = async () => {
     }
 };
 
-export const generatePdf = async (csvFilePath) => {
-    try {
-        const response = await fetch(`${API_BASE_URL}/cards/generate-pdf`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ csv_file_path: csvFilePath }),
-        });
-        if (!response.ok) {
-            throw new Error("Error generating PDF");
-        }
-        const data = await response.blob();
-        return data; // Returns blob
-    } catch (error) {
-        console.error("Error generating PDF:", error);
-        throw error;
-    }
+export const generatePdf = async ({ formData, textAlign, textJustify, textColor }) => {
+  const qs = new URLSearchParams({
+    text_align: textAlign,
+    text_justify: textJustify,
+    text_color: textColor.replace("#", ""),
+  }).toString();
+
+  const response = await fetch(`${API_BASE_URL}/cards/generate-pdf?${qs}`, {
+    method: "POST",
+    body: formData,
+  })
+  
+  if (!response.ok) {
+    const err = await response.text()
+    throw new Error(`Error ${response.status}: ${err}`)
+  }  return response.blob();
 };

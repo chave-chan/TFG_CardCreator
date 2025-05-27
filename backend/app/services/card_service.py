@@ -7,7 +7,7 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.units import mm
 from reportlab.lib.utils import ImageReader
 from PIL import Image, ImageDraw, ImageFont
-from concurrent.futures import ProcessPoolExecutor
+from concurrent.futures import ThreadPoolExecutor
 from functools import lru_cache
 import textwrap
 import cairosvg
@@ -181,49 +181,50 @@ def apply_justification(lines, draw, font, color, line_heights, line_spacing, y_
         draw.text((x_position, y_offset), line, font=font, fill=color)
         y_offset += line_heights[i] + line_spacing  # Next line
 
+### PDF GENERATION ###
+# Create a card from SVG bytes
+def create_card_from_bytes(svg_bytes: bytes, title: str, text: str,text_align: str, text_justify: str, text_color: tuple[int,int,int]):
+    # Convert SVG to PNG
+    png = cairosvg.svg2png(bytestring=svg_bytes, dpi=96)
+    return create_card(png, title, text, text_align, text_justify, text_color)
+
 # Generate the PDF
-def generate_pdf(cards_df, text_align="center", text_justify="center", text_color=(0, 0, 0)):
-    # Create the PDF buffer
-    pdf_buffer = io.BytesIO()
-    c = canvas.Canvas(pdf_buffer, pagesize=A4)
+def generate_pdf(cards_df: pd.DataFrame,
+                 svg_bytes: bytes,
+                 text_align="center",
+                 text_justify="center",
+                 text_color=(0,0,0)) -> io.BytesIO:
+    pdf_buf = io.BytesIO()
+    c = canvas.Canvas(pdf_buf, pagesize=A4)
 
-    card_count = 0
-    unique_cards = cards_df.drop_duplicates(subset=["type", "title", "text"])
-
-    # Generate the cards in parallel
-    with ProcessPoolExecutor() as executor:
-        unique_card_buffers = {
-            (row["type"], row["title"], row["text"]): executor.submit(
-                create_card_image_buffer,
-                row["type"],
-                row["title"],
-                row["text"],
-                text_align,
-                text_justify,
-                text_color
+    # For each card, will create a unique image
+    unique = cards_df.drop_duplicates(subset=["title","text"])
+    with ThreadPoolExecutor() as executor:
+        futures = {
+            idx: executor.submit(
+                create_card_from_bytes,
+                svg_bytes,
+                row["title"], row["text"],
+                text_align, text_justify, text_color
             )
-            for _, row in unique_cards.iterrows()
+            for idx, row in unique.iterrows()
         }
 
-    for _, row in cards_df.iterrows():
-        for _ in range(row['quantity']):
+    card_count = 0
+    for idx, row in cards_df.iterrows():
+        for _ in range(int(row["quantity"])):
+            # Position
             x = PAGE_MARGIN + (card_count % CARDS_PER_ROW) * (CARD_WIDTH + CARD_MARGIN)
-            y = PAGE_HEIGHT - PAGE_MARGIN - ((card_count // CARDS_PER_ROW) % CARDS_PER_COL + 1) * (CARD_HEIGHT + CARD_MARGIN)
-
-            if card_count > 0 and card_count % (CARDS_PER_ROW * CARDS_PER_COL) == 0:
+            y = PAGE_HEIGHT - PAGE_MARGIN - ((card_count//CARDS_PER_ROW)%CARDS_PER_COL + 1)*(CARD_HEIGHT+CARD_MARGIN)
+            if card_count>0 and card_count%(CARDS_PER_ROW*CARDS_PER_COL)==0:
                 c.showPage()
                 x = PAGE_MARGIN
                 y = PAGE_HEIGHT - PAGE_MARGIN - CARD_HEIGHT
 
-            # Draw the card image
-            card_key = (row["type"], row["title"], row["text"])
-            card_buffer = unique_card_buffers[card_key].result()
-            card_image_reader = ImageReader(card_buffer)
-            c.drawImage(card_image_reader, x, y, width=CARD_WIDTH, height=CARD_HEIGHT)
-
+            img = futures[idx].result()
+            c.drawImage(ImageReader(img), x, y, width=CARD_WIDTH, height=CARD_HEIGHT)
             card_count += 1
 
-    # Save the PDF
     c.save()
-    pdf_buffer.seek(0)  # Reset the buffer position to the beginning
-    return pdf_buffer
+    pdf_buf.seek(0)
+    return pdf_buf
