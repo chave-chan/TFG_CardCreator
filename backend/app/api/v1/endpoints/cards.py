@@ -50,9 +50,11 @@ async def generate_pdf_endpoint(
     try:
         df = pd.read_csv(csv.file)
         df['title'] = df['title'].fillna("")
-        df["text"]  = df["text"].fillna("")
-        df["quantity"] = df["quantity"].astype(int)
-
+        df['text']  = df['text'].fillna("")
+        df['quantity'] = pd.to_numeric(df['quantity'], errors="coerce")
+        df['quantity'] = df['quantity'].fillna(1)
+        df['quantity'] = df['quantity'].astype(int)
+        print(">>> quantities:", df["quantity"].tolist()) ### TEST
         
         text_color_rgb = tuple(int(text_color[i:i+2], 16) for i in (1, 3, 5))
         svg_bytes = await background.read() if background else b""
