@@ -60,6 +60,7 @@ const CreatorPage = () => {
   const handleCsvUpload = (e) => {
     const file = e.target.files[0];
     setCsvFile(file);
+
     Papa.parse(file, {
       header: true,
       skipEmptyLines: true,
@@ -69,8 +70,14 @@ const CreatorPage = () => {
           cardTitle: row.title,
           cardDescription: row.text,
           cardQuantity: row.quantity,
+          textFont,
+          textColor,
+          textAlign,
+          textJustify,
+          cardBackground,
         }));
         setCards(csvCards);
+        setActiveView("preview");
       },
       error: (error) =>
         console.error("Error processing the CSV file:", error),
@@ -93,9 +100,9 @@ const CreatorPage = () => {
 
     const formData = new FormData();
     formData.append("csv", csvFile);
-    cards.forEach((card, i) => {
-      formData.append("background", card.cardBackground, card.cardBackground.name);
-    });
+    if (cardBackground) {
+      formData.append("background", cardBackground, cardBackground.name);
+    }
 
     try {
       // Call the API to generate the PDF
