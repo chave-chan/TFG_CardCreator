@@ -6,8 +6,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = `/node_modules/pdfjs-dist/build/pdf.worker
 
 const PdfPreviewPage = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const pdfUrl = location.state?.pdfUrl;
+  const { pdfUrl } = useLocation().state || {};
   const [scale, setScale] = useState(1.0);
 
   return (
@@ -37,13 +36,10 @@ const PdfPreviewPage = () => {
 
       {/* PDF Previewer */}
       <div className="flex-1 flex justify-center items-center border rounded-lg shadow mb-4">
-        {pdfUrl ? (
-            <Document file={pdfUrl} className="flex justify-center mt-8 h-full text-gray-400">
-              <Page pageNumber={1} scale={scale} />
-            </Document>
-          ) : (
-            <p className="text-red-500">Cannot load file.</p>
-          )}
+        {pdfUrl
+          ? <iframe src={pdfUrl} title="PDF Preview" className="w-full h-full" />
+          : <p className="text-center text-gray-500 mt-20">Cannot load file.</p>
+        }
       </div>
 
       {/* Back to Creator Button */}

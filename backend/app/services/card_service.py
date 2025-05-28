@@ -188,43 +188,78 @@ def create_card_from_bytes(svg_bytes: bytes, title: str, text: str,text_align: s
     png = cairosvg.svg2png(bytestring=svg_bytes, dpi=96)
     return create_card(png, title, text, text_align, text_justify, text_color)
 
+def draw_text_on_image(img, title, text, align, justify, color, font):
+    draw = ImageDraw.Draw(img)
+    lines, heights, total_h, _ = get_text_lines(draw, font, title, text)
+    spacing = 15
+    if align == "top":
+        y0 = TEXT_MARGIN
+    elif align == "bottom":
+        y0 = CARD_HEIGHT*16 - total_h - spacing*(len(lines)-1) + TEXT_MARGIN
+    else:  # center
+        y0 = (CARD_HEIGHT*16 - total_h - spacing*(len(lines)-1)) / 2
+    apply_justification(lines, draw, font, color, heights, spacing, y0, justify)
+
+def create_card_image(png_bytes, title, text, align, justify, color):
+    img = Image.open(io.BytesIO(png_bytes)).convert("RGBA")
+    mask = Image.new("L", img.size, 0)
+    mdraw = ImageDraw.Draw(mask)
+    round_rectangle(mdraw, (0,0), img.size, ROUND_RADIUS, 255)
+    img.putalpha(mask)
+    font = load_font()
+    draw_text_on_image(img, title, text, align, justify, color, font)
+    return img
+
 # Generate the PDF
 def generate_pdf(cards_df: pd.DataFrame,
-                 svg_bytes: bytes,
+                 svg_bytes: bytes = b"",
                  text_align="center",
                  text_justify="center",
                  text_color=(0,0,0)) -> io.BytesIO:
-    pdf_buf = io.BytesIO()
-    c = canvas.Canvas(pdf_buf, pagesize=A4)
+    buffer = io.BytesIO()
+    c = canvas.Canvas(buffer, pagesize=A4)
+
+    png_data = cairosvg.svg2png(bytestring=svg_bytes, dpi=96)
+
+    buffer = io.BytesIO()
+    c = canvas.Canvas(buffer, pagesize=A4)
 
     # For each card, will create a unique image
-    unique = cards_df.drop_duplicates(subset=["title","text"])
+    unique = cards_df.drop_duplicates(subset=["type","title","text"])
     with ThreadPoolExecutor() as executor:
         futures = {
-            idx: executor.submit(
-                create_card_from_bytes,
-                svg_bytes,
-                row["title"], row["text"],
-                text_align, text_justify, text_color
+            (row["type"], row["title"], row["text"]): executor.submit(
+                create_card_image,
+                png_data,
+                row["title"],
+                row["text"],
+                text_align,
+                text_justify,
+                text_color
             )
-            for idx, row in unique.iterrows()
+            for _, row in unique.iterrows()
         }
 
-    card_count = 0
-    for idx, row in cards_df.iterrows():
-        for _ in range(int(row["quantity"])):
-            # Position
-            x = PAGE_MARGIN + (card_count % CARDS_PER_ROW) * (CARD_WIDTH + CARD_MARGIN)
-            y = PAGE_HEIGHT - PAGE_MARGIN - ((card_count//CARDS_PER_ROW)%CARDS_PER_COL + 1)*(CARD_HEIGHT+CARD_MARGIN)
-            if card_count>0 and card_count%(CARDS_PER_ROW*CARDS_PER_COL)==0:
+    count = 0
+    for _, row in cards_df.iterrows():
+        qty = int(row.get("quantity", 1))
+        for _ in range(qty):
+            if count > 0 and count % (CARDS_PER_ROW*CARDS_PER_COL) == 0:
                 c.showPage()
-                x = PAGE_MARGIN
-                y = PAGE_HEIGHT - PAGE_MARGIN - CARD_HEIGHT
+            col = (count % CARDS_PER_ROW)
+            rown = (count // CARDS_PER_ROW) % CARDS_PER_COL
+            x = PAGE_MARGIN + col*(CARD_WIDTH + CARD_MARGIN)
+            y = A4[1] - PAGE_MARGIN - (rown+1)*(CARD_HEIGHT + CARD_MARGIN)
 
-            img = futures[idx].result()
-            c.drawImage(ImageReader(img), x, y, width=CARD_WIDTH, height=CARD_HEIGHT)
-            card_count += 1
+            key = (row["type"], row["title"], row["text"])
+            img = futures[key].result()
+            img_buf = io.BytesIO()
+            img.save(img_buf, format="PNG")
+            img_buf.seek(0)
+
+            c.drawImage(ImageReader(img_buf), x, y, width=CARD_WIDTH, height=CARD_HEIGHT)
+            count += 1
 
     c.save()
-    pdf_buf.seek(0)
-    return pdf_buf
+    buffer.seek(0)
+    return buffer

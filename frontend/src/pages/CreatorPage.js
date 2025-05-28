@@ -81,14 +81,6 @@ const CreatorPage = () => {
   const handleGeneratePdf = async () => {
     if (cards.length === 0) return;
 
-    const lastCard = cards[cards.length - 1];
-    const background = lastCard.cardBackground; 
-
-    if (!background) {
-      console.warn("No background");
-      return;
-    }
-
     const csvData = cards.map(card => ({
       type: card.cardType,
       title: card.cardTitle,
@@ -102,11 +94,13 @@ const CreatorPage = () => {
 
     const formData = new FormData();
     formData.append("csv", csvFile);
-    formData.append("background", background, background.name);
+    cards.forEach((card, i) => {
+      formData.append("background", card.cardBackground, card.cardBackground.name);
+    });
 
     try {
       // Call the API to generate the PDF
-      const pdfBlob = await generatePdf({ formData, textAlign, textJustify, textColor});
+      const pdfBlob = await generatePdf(formData, textAlign, textJustify, textColor);
       const pdfUrl = URL.createObjectURL(pdfBlob);
       navigate("/pdf-preview", { state: { pdfUrl } });
     } catch (error) {

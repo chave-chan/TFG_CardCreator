@@ -55,20 +55,18 @@ export const getCards = async () => {
     }
 };
 
-export const generatePdf = async ({ formData, textAlign, textJustify, textColor }) => {
-  const qs = new URLSearchParams({
-    text_align: textAlign,
-    text_justify: textJustify,
-    text_color: textColor.replace("#", ""),
-  }).toString();
-
-  const response = await fetch(`${API_BASE_URL}/cards/generate-pdf?${qs}`, {
-    method: "POST",
-    body: formData,
-  })
-  
-  if (!response.ok) {
-    const err = await response.text()
-    throw new Error(`Error ${response.status}: ${err}`)
-  }  return response.blob();
+export const generatePdf = async (formData, textAlign, textJustify, textColor) => {
+  const colorParam = textColor.replace("#", "");
+  const res = await fetch(
+    `${API_BASE_URL}/cards/generate-pdf?text_align=${textAlign}&text_justify=${textJustify}&text_color=${colorParam}`,
+    {
+      method: "POST",
+      body: formData,
+    }
+  );
+  if (!res.ok) {
+    const txt = await res.text();
+    throw new Error(`Error ${res.status}: ${txt}`);
+  }
+  return res.blob();
 };

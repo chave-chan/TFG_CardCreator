@@ -53,9 +53,9 @@ async def generate_pdf_endpoint(
         df["text"]  = df["text"].fillna("")
         df["quantity"] = df["quantity"].astype(int)
 
-        svg_bytes = await background.read()
+        
         text_color_rgb = tuple(int(text_color[i:i+2], 16) for i in (1, 3, 5))
-
+        svg_bytes = await background.read() if background else b""
         pdf_buffer = generate_pdf(df, svg_bytes, text_align, text_justify, text_color_rgb)
 
         return StreamingResponse(pdf_buffer, media_type="application/pdf", headers={"Content-Disposition": "attachment; filename=cards.pdf"})
