@@ -34,7 +34,7 @@ const CreatorPage = () => {
       cardType,
       cardTitle,
       cardDescription,
-      cardQuantity,
+      cardQuantity: cardQuantityNumber,
       textFont,
       textColor,
       textAlign,
@@ -43,7 +43,7 @@ const CreatorPage = () => {
       //cardBack,
     };
     const newCards = Array.from({ length: cardQuantityNumber }, () => ({ ...newCard }));
-    setCards(prev => [...prev, ...newCards]);
+    setCards(prev => [...prev, newCard]);
     setCardType("");
     setCardTitle("");
     setCardDescription("");
