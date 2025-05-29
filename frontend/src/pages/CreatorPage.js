@@ -112,21 +112,21 @@ const CreatorPage = () => {
     <div className="flex h-screen bg-white">
       {/* Left Column - Creator */}
       <div className="w-1/2 bg-white p-8 flex flex-col h-full">
-      <div>
-        <h1 className="font-caprasimo text-3xl mb-4">Creator</h1>
-        <h2 className="text-xl font-semibold mb-4 text-gray-700 flex items-center">
-          Upload a CSV file with all your cards
-          <div className="relative group ml-2">
-            <div className="flex items-center justify-center w-5 h-5 bg-gray-200 rounded-full text-xs font-bold text-gray-700 cursor-pointer">
-              i
-            </div>
-            <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-48 p-2 bg-gray-200 text-black text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
-              The CSV must have the fields: type, title, text, and quantity.
-            </div>
-          </div>
-        </h2>
-      </div>
+      <h1 className="font-caprasimo text-3xl mb-4">Creator</h1>
         <div className="space-y-4 flex-1 overflow-y-auto">
+          <div>
+            <h2 className="text-xl font-semibold mb-4 text-gray-700 flex items-center">
+              Upload a CSV file with all your cards
+              <div className="relative group ml-2">
+                <div className="flex items-center justify-center w-5 h-5 bg-gray-200 rounded-full text-xs font-bold text-gray-700 cursor-pointer">
+                  i
+                </div>
+                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-48 p-2 bg-gray-200 text-black text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
+                  The CSV must have the fields: type, title, text, and quantity.
+                </div>
+              </div>
+            </h2>
+          </div>
           <div>
             <label className="block text-gray-700 mb-1">CSV file</label>
             <FileInput onChange={handleCsvUpload} />
