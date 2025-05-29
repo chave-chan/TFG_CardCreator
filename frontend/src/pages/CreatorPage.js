@@ -42,6 +42,7 @@ const CreatorPage = () => {
       cardBackground,
       //cardBack,
     };
+    const newCards = Array.from({ length: cardQuantityNumber }, () => ({ ...newCard }));
     setCards(prev => [...prev, newCard]);
     setCardType("");
     setCardTitle("");
@@ -315,11 +316,15 @@ const CreatorPage = () => {
             <div className="flex-1 overflow-y-auto mt-4">
               {cards.length > 0 ? (
                 <ul className="space-y-2">
-                  {cards.map((card, idx) =>
-                    Array.from({ length: card.quantity }, (_, i) => (
-                      <li key={`${idx}-${i}`}>{card.cardTitle}</li>
-                    ))
-                  )}
+                  {cards.map((card, index) => (
+                    <li
+                      key={index}
+                      className="border p-4 rounded-lg bg-white shadow"
+                    >
+                      <h3 className="text-lg font-semibold">{card.cardTitle}</h3>
+                      <p>{card.cardDescription}</p>
+                    </li>
+                  ))}
                 </ul>
               ) : (
                 <p className="text-gray-400 text-center mt-4">
