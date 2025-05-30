@@ -10,38 +10,92 @@ The project is organized into several folders with a modular structure to make i
 CardCreator/
 │
 ├── backend/
-  ├── app/
-    ├── api/
-    ├── core/
-    ├── database/
-    ├── models/
-    ├── schemas/
-    ├── services/
-    ├── utils/
-    └── main.py               # The backend main script 
+│ └── app/
+│   ├── api/                  # API
+│   │ └── v1/
+│   │   ├── endpoints/        # Endpoints
+│   │   │ ├── auth.py
+│   │   │ ├── cards.py
+│   │   │ └── users.py
+│   │   │
+│   │   └── api_v1.py         # Routes
+│   │
+│   ├── core/
+│   │ ├── config.py
+│   │ └── security.py
+│   │
+│   ├── database/             # Database
+│   │ ├── base.py
+│   │ └── session.py
+│   │
+│   ├── models/
+│   │ └── user.py
+│   │
+│   ├── schemas/
+│   │ └── user.py
+│   │
+│   ├── services/             # Backend services
+│   │ ├── card_service.py
+│   │ └── user_service.py
+│   │
+│   ├── utils/
+│   │ └── auth.py
+│   │
+│   └── main.py               # The backend main script 
 │
 ├──frontend/
-  └── src/
-    ├── components/
-    ├── pages/
-      ├── CreatorPage.js
-      ├── HomePage.js
-      ├── MyCardsPage.js
-      └── PdfPreviewPage.js
-    ├── services/
-      └── apiService.js
-    ├── App.js
-    └── index.js
+│ └── src/
+│   ├── components/           # Frontend custom components
+│   │ ├── button/
+│   │ │ └── Button.js
+│   │ │
+│   │ ├── cardManager/
+│   │ │ └── CardManager.js
+│   │ │
+│   │ ├── cardPreview/
+│   │ │ └── CardPreview.js
+│   │ │
+│   │ ├── colorPicker/
+│   │ │ └── ColorPicker.js
+│   │ │
+│   │ ├── fileInput/
+│   │ │ └── FileInput.js
+│   │ │
+│   │ ├── fontSelector/
+│   │ │ └──FontSelector.js
+│   │ │
+│   │ ├── header/
+│   │ │ └── Header.js
+│   │ │
+│   │ ├── text/
+│   │ │ └── Text.js
+│   │ │
+│   │ └── textInput/
+│   │   └── TextInput.js
+│   │
+│   ├── pages/                # Frontend pages
+│   │ ├── CreatorPage.js
+│   │ ├── HomePage.js
+│   │ ├── MyCardsPage.js
+│   │ └── PdfPreviewPage.js
+│   │
+│   ├── services/             # Frontend api service
+│   │ └── apiService.js
+│   │
+│   ├── App.js                # Frontend app script
+│   ├── index.js
+│   └── default.svg           # Default card background
 │
 ├── script/
-  ├── data/                   # Folder for your documents (not tracked on github)
-  │   └── cards.csv           # CSV with the information of your cards 
-  │
-  ├── images/                 # Type of cards of your game
-  │   ├── card_type_1.png        
-  │   └── card_type_2.png  
-  │
-  └── main.py                 # The main script 
+│ ├── data/                   # Folder for CSV files
+│ │   └── cards.csv           # CSV with the information of the cards 
+│ │
+│ ├── images/                 # Type of cards of the game
+│ │   ├── card_type_1.png        
+│ │   └── card_type_2.png  
+│ │
+│ └── main.py                 # The main script 
+│
 ├── README.md               
 └── requirements.txt        # Dependencies of the project
 ```
