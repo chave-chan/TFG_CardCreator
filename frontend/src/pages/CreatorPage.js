@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { generatePdf } from "../services/apiService";
 import {
@@ -10,6 +10,7 @@ import {
   TextInput,
 } from "../components";
 import Papa from "papaparse";
+import defaultCardBackground from "../default.svg";
 
 const CreatorPage = () => {
   const [csvFile, setCsvFile] = useState(null);
@@ -27,6 +28,18 @@ const CreatorPage = () => {
   const [activeView, setActiveView] = useState("preview");
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    fetch(defaultCardBackground)
+      .then((res) => res.blob())
+      .then((blob) => {
+        const file = new File([blob], "default.svg", {
+          type: "image/svg+xml",
+        });
+        setCardBackground(file);
+      })
+      .catch(console.error);
+  }, []);
 
   const addCard = () => {
     const cardQuantityNumber = parseInt(cardQuantity, 10) || 1;
@@ -70,6 +83,10 @@ const CreatorPage = () => {
           cardTitle: row.title,
           cardDescription: row.text,
           cardQuantity: row.quantity,
+          cardBackground,
+          textAlign,
+          textJustify,
+          textColor,
         }));
         setCards(csvCards);
       },
