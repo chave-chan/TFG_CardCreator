@@ -9,14 +9,39 @@ The project is organized into several folders with a modular structure to make i
 ```
 CardCreator/
 │
-├── data/                   # Folder for your documents (not tracked on github)
-│   └── cards.csv           # CSV with the information of your cards 
+├── backend/
+  ├── app/
+    ├── api/
+    ├── core/
+    ├── database/
+    ├── models/
+    ├── schemas/
+    ├── services/
+    ├── utils/
+    └── main.py               # The backend main script 
 │
-├── images/                 # Type of cards of your game
-│   ├── card_type_1.png        
-│   └── card_type_2.png  
+├──frontend/
+  └── src/
+    ├── components/
+    ├── pages/
+      ├── CreatorPage.js
+      ├── HomePage.js
+      ├── MyCardsPage.js
+      └── PdfPreviewPage.js
+    ├── services/
+      └── apiService.js
+    ├── App.js
+    └── index.js
 │
-├── main.py                 # The main script 
+├── script/
+  ├── data/                   # Folder for your documents (not tracked on github)
+  │   └── cards.csv           # CSV with the information of your cards 
+  │
+  ├── images/                 # Type of cards of your game
+  │   ├── card_type_1.png        
+  │   └── card_type_2.png  
+  │
+  └── main.py                 # The main script 
 ├── README.md               
 └── requirements.txt        # Dependencies of the project
 ```
@@ -68,6 +93,12 @@ With the virtual environment activated, install the project dependencies from th
 
 ```bash
 pip install -r requirements.txt
+```
+
+If the system asks for it, upgrade pip:
+
+```bash
+pip install --upgrade pip
 ```
 
 ### 4. Build and Up the Docker

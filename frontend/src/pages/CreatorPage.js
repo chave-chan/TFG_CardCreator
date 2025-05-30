@@ -310,6 +310,10 @@ const CreatorPage = () => {
         <div className="flex-1 flex flex-col mt-4 min-h-0">
           {activeView === "preview" ? (
             <div className="flex-1 flex items-center justify-center min-h-0">
+              {/* Render the first card preview
+              <CardPreview card={cards[0]} />
+              /*}
+              {/* Render the last card preview*/}
               {cards.length > 0 && <CardPreview card={cards[cards.length - 1]} />}
             </div>
           ) : (
