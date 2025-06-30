@@ -2,6 +2,14 @@
 
 This project implements a **Card creator script** were you can create your own card game easily with only a csv.
 
+<img width="1470" alt="Captura de pantalla 2025-06-30 a las 20 43 03" src="https://github.com/user-attachments/assets/a401fd47-27fd-4e82-937b-88c28023af05" />
+
+<img width="1470" alt="Captura de pantalla 2025-06-30 a las 20 43 18" src="https://github.com/user-attachments/assets/93a70bda-5692-4b64-9379-84554854fa28" />
+
+<img width="1470" alt="Captura de pantalla 2025-06-30 a las 20 43 37" src="https://github.com/user-attachments/assets/5b69185f-8614-43ba-afff-0dc8d064c90c" />
+
+
+
 ## Project Structure
 
 The project is organized into several folders with a modular structure to make it easy to extend and maintain:
