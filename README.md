@@ -1,6 +1,6 @@
 # Card creator
 
-This project implements a **Card creator script** were you can create your own card game easily with only a csv.
+This project implements a **Card creator web app** were you can create your own card game easily with only a csv.
 
 <img width="1470" alt="Captura de pantalla 2025-06-30 a las 20 43 03" src="https://github.com/user-attachments/assets/a401fd47-27fd-4e82-937b-88c28023af05" />
 
